@@ -1,74 +1,69 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import styled from 'styled-components';
-import { Typography } from 'antd';
 
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import 'swiper/modules/pagination/pagination.min.css';
+import useUsers from '../../hooks/api/useUsers.js';
+import useLogin from '../../hooks/api/useLogIn.js';
 
-const { Title, Paragraph } = Typography;
+//TODO: tratar os loading e erros
 export default function UserSwiper() {
+	const { users, usersIsLoading, usersError } = useUsers();
+	console.log(users, usersIsLoading, usersError);
+	const { getUserToken } = useLogin();
+
+	async function userChoose(userId) {
+		try {
+			const userToken = await getUserToken(userId);
+			console.log(userToken);
+		} catch (e) {
+
+		}
+	}
+
 	return (
 		<SwiperWrapper>
-			<Typography>
-				<Swiper
-					slidesPerView={3}
-					spaceBetween={0}
-					centeredSlides={true}
-					loop={true}
-					updateOnWindowResize={true}
-					direction={'vertical'}
-					breakpoints={{
-						760: {
-							direction: 'horizontal',
-							spaceBetween: 10,
-							slidesPerView: 3,
-							pagination: true,
-						}
-					}}
-				>
-					<SwiperSlide>
-						<UserInfoWrapper>
-							<UserImage image='https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg' />
-							<UserName>Emerson</UserName>
-							<UserPosition>admin</UserPosition>
-						</UserInfoWrapper>
-					</SwiperSlide>
-					<SwiperSlide>
-						<UserInfoWrapper>
-							<UserImage image='https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg' />
-							<UserName>Emerson</UserName>
-							<UserPosition>admin</UserPosition>
-						</UserInfoWrapper>
-					</SwiperSlide>
-					<SwiperSlide>
-						<UserInfoWrapper>
-							<UserImage image='https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg' />
-							<UserName>Emerson</UserName>
-							<UserPosition>admin</UserPosition>
-						</UserInfoWrapper>
-					</SwiperSlide>
-					<SwiperSlide>
-						<UserInfoWrapper>
-							<UserImage image='https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg' />
-							<UserName>Emerson</UserName>
-							<UserPosition>admin</UserPosition>
-						</UserInfoWrapper>
-					</SwiperSlide>
-				</Swiper>
-			</Typography>
+			<Swiper
+				slidesPerView={3}
+				spaceBetween={0}
+				centeredSlides={true}
+				loop={true}
+				updateOnWindowResize={true}
+				direction={'vertical'}
+				breakpoints={{
+					760: {
+						direction: 'horizontal',
+						spaceBetween: 10,
+						slidesPerView: 3,
+						pagination: true,
+					}
+				}}
+			>
+				{users?.map(user => {
+					return (
+						<SwiperSlide key={user._id} onClick={() => userChoose(user._id)}>
+							<UserInfoWrapper>
+								<UserImage image={user.picture} />
+								<UserName>{user.name}</UserName>
+								{user.is_admin ? <UserPosition>admin</UserPosition> : <></>}
+							</UserInfoWrapper>
+						</SwiperSlide>
+					);
+				})}
+			</Swiper>
 		</SwiperWrapper>
 	);
 }
 
-const UserName = styled(Title)`
+const UserName = styled.h1`
 	color: white;
 	margin-top: 10px;
 	margin-bottom: 6px;
 `;
 
-const UserPosition = styled(Paragraph)`
+const UserPosition = styled.p`
 	color: white;
 
 `;
@@ -86,6 +81,7 @@ const UserImage = styled.div`
 	height: 95px;     
     width: 95px;
 	background: url(${props => props.image});
+	background-color: white;
 	background-size: cover;
 	border-radius: 50%;
 `;

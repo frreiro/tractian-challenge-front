@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Typography } from 'antd';
 import UserSwiper from '../../components/UserSwiper/index.js';
-
-const { Title } = Typography;
 
 export default function SignIn() {
 	return (
 		<Screen>
-			<TractianTitle level={1}>TRACTIAN</TractianTitle>
-			<SecondTitle level={3}>Escolha seu login</SecondTitle>
+			<TractianTitle>TRACTIAN</TractianTitle>
+			<SecondTitle>Escolha seu login</SecondTitle>
 			<div>
 				<UserSwiper />
 			</div>
@@ -17,13 +14,13 @@ export default function SignIn() {
 	);
 }
 
-const TractianTitle = styled(Title)`
+const TractianTitle = styled.h1`
 	font-size: 96px;
 	color: white;
 	margin-bottom: 10px;
 `;
 
-const SecondTitle = styled(Title)`
+const SecondTitle = styled.h4`
 	font-size: 36px;
 	color: white;
 	font-weight: normal;
@@ -38,4 +35,14 @@ const Screen = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	@media (max-width: 760px) {
+		${TractianTitle}{
+			font-size: 86px;
+		}
+
+		${SecondTitle}{
+			font-size: 26px;
+		}
+    }
 `;
