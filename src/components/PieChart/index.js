@@ -1,31 +1,32 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import customTheme from '../../config/columnChartTheme.js';
-export default function BasicColumnChart({ entityArray }) {
+import createAssetsStatusIterableFormat from './calculatePorcentage.js';
+
+export default function PieChart({ entityArray }) {
 	Highcharts.setOptions(customTheme);
+
+	const iterablePieFormat = createAssetsStatusIterableFormat(entityArray);
+
 	const options = {
 		chart: {
-			type: 'column',
+			type: 'pie',
 		},
 		title: {
-			text: 'Assets by units',
+			text: 'Assets status',
 		},
-
-		yAxis: {
-			title: {
-				enabled: false
-			},
-		},
-		xAxis: {
-			categories: entityArray.map(unit => unit.name)
+		plotOptions: {
+			pie: {
+				innerSize: '45%'
+			}
 		},
 		series: [{
-			data: entityArray.map(unit => unit.assets.length),
-			color: 'white'
+			data: iterablePieFormat,
 		}]
 	};
 
 	function teste(e) {
+		//console.log(e);
 	}
 	return (
 		<>

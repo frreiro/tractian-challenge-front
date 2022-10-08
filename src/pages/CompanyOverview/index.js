@@ -7,6 +7,7 @@ import SideMenu from '../../components/Overview/Menu/index.js';
 import VerticalBanner from '../../components/VerticalBanner/index.js';
 import CompanyContext from '../../contexts/companyContext.js';
 import ColumnChartBanner from '../../components/Overview/ColumnChartBanner/index.js';
+import PieChartBanner from '../../components/Overview/PieCharBanner/index.js';
 
 const companyData = {
 	'_id': '63406b5e661dc129a26bba75',
@@ -54,7 +55,19 @@ const companyData = {
 					'health_level': '100',
 					'company_unit_id': '63406be9c5331330f16d29a2',
 					'image': 'https://hfjwilebkbsilqopcgdy.supabase.co/storage/v1/object/public/tractian-images/tractian-uploads/e5ac33f0-7b4a-4d99-8d7b-99e79d228a09.jpg'
-				}
+				},
+				{
+					'_id': '633f0b1de2ff4fabbc718f0cawaw',
+					'name': 'Pastilha',
+					'description': 'Patilha de freio',
+					'model': 'STARK',
+					'owner': 'Tony Stark',
+					'status': 'Stopped',
+					'health_level': '100',
+					'company_unit_id': '63406be9c5331330f16d29a2',
+					'image': 'https://hfjwilebkbsilqopcgdy.supabase.co/storage/v1/object/public/tractian-images/tractian-uploads/e5ac33f0-7b4a-4d99-8d7b-99e79d228a09.jpg'
+				},
+
 			]
 		}
 	]
@@ -62,21 +75,24 @@ const companyData = {
 
 export default function CompanyOverView() {
 	//const { companyData } = useContext(CompanyContext);
-	console.log(companyData);
+	//console.log(companyData);
 	return (
 		<CompanyGeneral>
 			<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} />
 			<CompanyInfos>
 				<TitleContainer>
 					<div>
-						<GlobalOutlined style={{ color: '#fff', fontSize: 59, marginRight: 22 }} />
+						<GlobalOutlined style={{ color: '#fff', fontSize: 40, marginRight: 22 }} />
 						<h1>OVERVIEW</h1>
 					</div>
 					<p>{companyData.name}</p>
 				</TitleContainer>
 				<InfomationArea>
 					<VerticalBanner units={companyData.units} />
-					<ColumnChartBanner entityArray={companyData.units} />
+					<div className='horizontalBannersContainer'>
+						<ColumnChartBanner entityArray={companyData.units} />
+						<PieChartBanner entityArray={companyData.units} />
+					</div>
 				</InfomationArea>
 			</CompanyInfos>
 		</CompanyGeneral>
@@ -86,6 +102,13 @@ export default function CompanyOverView() {
 const InfomationArea = styled.div`
 	padding-top: 76px;
 	display: flex;
+
+	.horizontalBannersContainer {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		margin-left: 30px;
+	}
 `;
 
 const TitleContainer = styled.div`
@@ -103,13 +126,13 @@ const TitleContainer = styled.div`
 
 	h1{
 		font-weight: 700;
-		font-size: 60px;
+		font-size: 40px;
 		color: white;
 	}
 
 	p{
 		font-weight: 500;
-		font-size: 40px;
+		font-size: 20px;
 		color: white;
 
 	}

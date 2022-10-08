@@ -11,7 +11,7 @@ const customTheme = {
 	title: {
 		style: {
 			color: '#fff',
-			fontSize: '30px',
+			fontSize: '20px',
 			fontWeight: '500'
 		},
 		margin: 50,

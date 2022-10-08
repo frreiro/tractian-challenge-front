@@ -18,22 +18,22 @@ export default function BannerEnitity({ name, image, unit, healthLevel }) {
 
 const EntityTitle = styled.p`
 	font-weight: 500;
-	font-size: 20px;
+	font-size: 15px;
 	font-style: normal;
 	color: white;
 `;
 
 const EntitySubtitle = styled.p`
 	font-weight: 300;
-	font-size: 15px;
+	font-size: 10px;
 	font-style: normal;
 	color: white;
 
 `;
 
 const EntityImage = styled.img`
-	width: 56px;
-	height: 56px;
+	width: 46px;
+	height: 46px;
 	border-radius: 50%;
 	background-color: white;
 	margin-right: 14px;

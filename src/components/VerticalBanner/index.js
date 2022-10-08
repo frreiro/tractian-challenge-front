@@ -22,8 +22,8 @@ export default function VerticalBanner({ units }) {
 }
 
 const VerticalBannerContainer = styled.article`
-	width:365px;
-	height: 647px;
+	width:300px;
+	height: 520px;
 	background-color: #3525EB;
 	border-radius: 10px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -35,7 +35,7 @@ const VerticalBannerContainer = styled.article`
 
 	h1{
 		font-weight: 500;
-		font-size: 30px;
+		font-size: 20px;
 		padding-top: 43px;
 		color: white;
 		margin-bottom: 53px;
