@@ -1,14 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import UserSwiper from '../../components/UserSwiper/index.js';
 
+import useLogin from '../../hooks/api/useLogIn.js';
+import useCompanyOverview from '../../hooks/api/useCompanyOverview.js';
+import UserContext from '../../contexts/userContext.js';
+import CompanyContext from '../../contexts/companyContext.js';
+import { useNavigate } from 'react-router';
+
 export default function SignIn() {
+	const { getUserToken } = useLogin();
+	const { getCompanyOverall } = useCompanyOverview();
+	const { setUserData } = useContext(UserContext);
+	const { setCompanyData } = useContext(CompanyContext);
+	const navigate = useNavigate();
+
+	async function userSelected(user) {
+		try {
+			const userToken = await getUserToken(user._id);
+			setUserData({ ...user, token: userToken });
+			const companyData = await getCompanyOverall(user.company_id, userToken);
+			setCompanyData(companyData);
+			navigate('/company');
+		} catch (e) {
+
+		}
+	}
+
 	return (
 		<Screen>
 			<TractianTitle>TRACTIAN</TractianTitle>
 			<SecondTitle>Escolha seu login</SecondTitle>
 			<div>
-				<UserSwiper />
+				<UserSwiper selectUser={userSelected} />
 			</div>
 		</Screen>
 	);

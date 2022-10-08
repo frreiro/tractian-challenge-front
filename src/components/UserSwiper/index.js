@@ -1,27 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import styled from 'styled-components';
 
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import 'swiper/modules/pagination/pagination.min.css';
+
 import useUsers from '../../hooks/api/useUsers.js';
-import useLogin from '../../hooks/api/useLogIn.js';
 
 //TODO: tratar os loading e erros
-export default function UserSwiper() {
+export default function UserSwiper({ selectUser }) {
 	const { users, usersIsLoading, usersError } = useUsers();
-	console.log(users, usersIsLoading, usersError);
-	const { getUserToken } = useLogin();
-
-	async function userChoose(userId) {
-		try {
-			const userToken = await getUserToken(userId);
-			console.log(userToken);
-		} catch (e) {
-
-		}
-	}
 
 	return (
 		<SwiperWrapper>
@@ -43,7 +32,7 @@ export default function UserSwiper() {
 			>
 				{users?.map(user => {
 					return (
-						<SwiperSlide key={user._id} onClick={() => userChoose(user._id)}>
+						<SwiperSlide key={user._id} onClick={() => selectUser(user)}>
 							<UserInfoWrapper>
 								<UserImage image={user.picture} />
 								<UserName>{user.name}</UserName>
