@@ -22,23 +22,24 @@ export default function SideMenu({ entityTitle, entityArray }) {
 
 const Title = styled.li`
 	font-weight: 700;
-	font-size: 35px;
+	font-size: 30px;
 	line-height: 52px;
 	margin-bottom: 40px;
+	color: white;
 `;
 
 const TitleEntity = styled.li`
 	font-style: normal;
-	font-size: 35px;
+	font-size: 25px;
 	line-height: 52px;
-	margin-bottom: 20px;
+	color: white;
 
 `;
 
 const Menu = styled.aside`
 	width: 262px;
 	height: 100vh;
-	background-color: white;
+	border-right: 1px solid white;
 
 	ul{
 		padding-top: 280px;

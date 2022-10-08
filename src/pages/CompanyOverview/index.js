@@ -2,12 +2,14 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { GlobalOutlined } from '@ant-design/icons';
+import MediaQuery from 'react-responsive';
 
 import SideMenu from '../../components/Overview/Menu/index.js';
 import VerticalBanner from '../../components/VerticalBanner/index.js';
 import CompanyContext from '../../contexts/companyContext.js';
-import ColumnChartBanner from '../../components/Overview/ColumnChartBanner/index.js';
-import PieChartBanner from '../../components/Overview/PieCharBanner/index.js';
+import ColumnChartUnitsBanner from '../../components/Overview/ColumnChartUnitsBanner/index.js';
+import PieChartStatusBanner from '../../components/Overview/PieCharStatusBanner/index.js';
+import ColumnChartHealthLevelBanner from '../../components/Overview/ColumnChartHalthLevelBanner/index.js';
 
 const companyData = {
 	'_id': '63406b5e661dc129a26bba75',
@@ -74,24 +76,33 @@ const companyData = {
 };
 
 export default function CompanyOverView() {
-	//const { companyData } = useContext(CompanyContext);
-	//console.log(companyData);
+	const { companyData } = useContext(CompanyContext);
+	console.log(companyData);
+
 	return (
 		<CompanyGeneral>
-			<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} />
+			<MediaQuery minWidth={1000}>
+				<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} />
+			</MediaQuery>
 			<CompanyInfos>
+
 				<TitleContainer>
 					<div>
-						<GlobalOutlined style={{ color: '#fff', fontSize: 40, marginRight: 22 }} />
+						<GlobalOutlined style={{ color: '#fff', fontSize: 45, marginRight: 22 }} />
 						<h1>OVERVIEW</h1>
 					</div>
 					<p>{companyData.name}</p>
 				</TitleContainer>
 				<InfomationArea>
-					<VerticalBanner units={companyData.units} />
+					<MediaQuery minWidth={760}>
+						<VerticalBanner units={companyData.units} />
+					</MediaQuery>
 					<div className='horizontalBannersContainer'>
-						<ColumnChartBanner entityArray={companyData.units} />
-						<PieChartBanner entityArray={companyData.units} />
+						<ColumnChartUnitsBanner entityArray={companyData.units} />
+						<PieChartStatusBanner entityArray={companyData.units} />
+						<MediaQuery maxWidth={760}>
+							<ColumnChartHealthLevelBanner entityArray={companyData.units} />
+						</MediaQuery>
 					</div>
 				</InfomationArea>
 			</CompanyInfos>
@@ -100,14 +111,14 @@ export default function CompanyOverView() {
 }
 
 const InfomationArea = styled.div`
-	padding-top: 76px;
+	padding-top: 50px;
 	display: flex;
 
 	.horizontalBannersContainer {
+		max-width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		margin-left: 30px;
 	}
 `;
 
@@ -118,7 +129,6 @@ const TitleContainer = styled.div`
 	align-items: center;
 	padding-top: 30px;
 
-
 	div{
 		display: flex;
 		padding-bottom: 10px;
@@ -126,7 +136,7 @@ const TitleContainer = styled.div`
 
 	h1{
 		font-weight: 700;
-		font-size: 40px;
+		font-size: 50px;
 		color: white;
 	}
 
@@ -147,4 +157,5 @@ const CompanyInfos = styled.main`
 
 const CompanyGeneral = styled.div`
 	display: flex;
+
 `;

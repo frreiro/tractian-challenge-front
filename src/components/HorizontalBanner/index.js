@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import BasicColumnChart from '../BasicColumChart/index.js';
-
-//import 'highcharts/css/highcharts.css';
 
 export default function HorizontalBanner({ children }) {
+	console.log({ children });
 	return (
 		<HorizontalBannerContainer>
 			{children}
@@ -12,7 +10,7 @@ export default function HorizontalBanner({ children }) {
 }
 
 const HorizontalBannerContainer = styled.article`
-	width:540px;
+	width: 540px;
 	height: 245px;
 	background-color: #3525EB;
 	border-radius: 10px;
@@ -31,5 +29,13 @@ const HorizontalBannerContainer = styled.article`
 		width: 100%;
 		height: 100%;
 	}
+
+
+	@media (max-width: 760px) {
+		width: 320px;
+		height: 165px;
+		margin-bottom: 20px;
+    }
+
 
 `;

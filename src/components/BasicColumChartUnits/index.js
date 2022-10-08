@@ -1,7 +1,8 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import customTheme from '../../config/columnChartTheme.js';
-export default function BasicColumnChart({ entityArray }) {
+
+export default function BasicColumnChartUnits({ entityArray }) {
 	Highcharts.setOptions(customTheme);
 	const options = {
 		chart: {
