@@ -57,7 +57,7 @@ export default function AssetView() {
 					<AssetInfoBanner asset={asset} />
 					<div className='horizontalBannersContainer'>
 						<MediaQuery minWidth={760}>
-							<AssetHealthLevelBanner porcentage={80} />
+							<AssetHealthLevelBanner porcentage={asset.health_level} />
 							<AssetStatusBanner status={asset.status} />
 						</MediaQuery>
 					</div>

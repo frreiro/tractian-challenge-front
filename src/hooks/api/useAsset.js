@@ -1,4 +1,4 @@
-import getAssetData from '../../services/asset.api.js';
+import { getAssetData } from '../../services/asset.api.js';
 import useAsync from '../useAsync.js';
 
 export default function useAsset() {

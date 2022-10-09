@@ -24,6 +24,11 @@ const VerticalBannerContainer = styled.article`
 	padding-right: 20px;
 	padding-bottom: 20px;
 
+	overflow: scroll;
+	::-webkit-scrollbar{
+		display: none;
+	}
+
 	h1{
 		font-weight: 500;
 		font-size: 20px;
