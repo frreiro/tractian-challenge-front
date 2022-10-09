@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import UserContext from '../../contexts/userContext.js';
 import MediaQuery from 'react-responsive';
 
-import SideMenu from '../../components/Overview/Menu/index.js';
+import SideMenu from '../../components/Menu/index.js';
 
 import { InfomationArea, TitleContainer, Dashboard, Main } from '../CompanyOverview/index.js';
 import useUnit from '../../hooks/api/useUnits.js';

@@ -1,10 +1,14 @@
+import { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
-import { GlobalOutlined, RocketOutlined } from '@ant-design/icons';
-import { useContext } from 'react';
-import UnitContext from '../../../contexts/unitContext.js';
-import CompanyContext from '../../../contexts/companyContext.js';
-import UserContext from '../../../contexts/userContext.js';
+import { GlobalOutlined, RocketOutlined, PlusCircleFilled } from '@ant-design/icons';
+
+import UnitContext from '../../contexts/unitContext.js';
+import CompanyContext from '../../contexts/companyContext.js';
+import UserContext from '../../contexts/userContext.js';
+import CreateUnit from './CreateUnit.js';
+import Tooltip from './Tooltip.js';
+import CreateAsset from './CreateAsset.js';
 
 export default function SideMenu({ entityTitle, entityArray }) {
 	const location = useLocation();
@@ -40,8 +44,11 @@ export default function SideMenu({ entityTitle, entityArray }) {
 						<TitleEntity key={entity._id} onClick={() => navigate(`/${setNextRoute()}/${entity._id}`)}>{entity.name}</TitleEntity>
 					);
 				})}
+				<Tooltip content={currentLocation === 'company' ? <CreateUnit /> : <CreateAsset />}>
+					{userData.is_admin ? <PlusCircleFilled style={{ color: '#fff', fontSize: 35, marginTop: 20, cursor: 'pointer' }} /> : <></>}
+				</Tooltip>
 			</ul>
-		</Menu>
+		</Menu >
 	);
 }
 
@@ -59,24 +66,30 @@ const TitleEntity = styled.li`
 	line-height: 52px;
 	color: white;
 	cursor: pointer;
+
 `;
 
 const Menu = styled.aside`
 	width: 262px;
 	height: 100vh;
 	border-right: 1px solid white;
-	/*padding-left: 10px;*/
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	word-break: break-word;
+
 	ul{
-		padding-top: 280px;
+		padding-top: 200px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
 	}
 
 	div{
-		padding-left: 40px;
-		padding-top: 50px;
+		display: flex;
+		justify-content: center;
+		/*padding-left: 40px;
+		padding-top: 50px;*/
 
 	}
 `;

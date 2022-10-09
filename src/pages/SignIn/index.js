@@ -15,6 +15,7 @@ export default function SignIn() {
 		try {
 			const userToken = await getUserToken(user._id);
 			setUserData({ ...user, token: userToken });
+			localStorage.setItem('userData', JSON.stringify({ ...user, token: userToken }));
 			navigate(`/company/${user.company_id}`);
 		} catch (e) {
 

@@ -1,4 +1,4 @@
-import getUnitData from '../../services/units.api.js';
+import { getUnitData } from '../../services/units.api.js';
 import useAsync from '../useAsync.js';
 
 export default function useUnit() {

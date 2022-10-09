@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { GlobalOutlined } from '@ant-design/icons';
 import MediaQuery from 'react-responsive';
 
-import SideMenu from '../../components/Overview/Menu/index.js';
+import SideMenu from '../../components/Menu/index.js';
 import VerticalBannerUnits from '../../components/Overview/VerticalBannerUnits/index.js';
 import ColumnChartUnitsBanner from '../../components/Overview/ColumnChartUnitsBanner/index.js';
 import PieChartStatusBanner from '../../components/Overview/PieCharStatusBanner/index.js';
