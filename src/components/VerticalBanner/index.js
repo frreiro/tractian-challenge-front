@@ -33,10 +33,9 @@ const VerticalBannerContainer = styled.article`
 		font-weight: 500;
 		font-size: 20px;
 		color: white;
-		/*margin-bottom: 53px;*/
 	}
 `;
 
 export const BannerTitle = styled.h1`
-		margin-bottom: 53px;
+		margin-bottom: 20px;
 `;

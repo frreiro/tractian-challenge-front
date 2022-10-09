@@ -12,6 +12,7 @@ export default function VerticalBannerAssets({ unit }) {
 					image={asset.image}
 					status={asset.status}
 					unit={unit.name}
+					id={asset._id}
 				/>;
 			})}
 		</VerticalBanner>

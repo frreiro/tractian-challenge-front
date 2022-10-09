@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import { CheckOutlined, CloseOutlined, WarningOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router';
 
-export default function BannerEnitityStatus({ name, image, unit, status }) {
+export default function BannerEnitityStatus({ name, image, unit, status, id }) {
+	const navigate = useNavigate();
+
 	return (
-		<EntityContainer>
+		<EntityContainer onClick={() => navigate('/asset/' + id)}>
 			<section>
 				<EntityImage src={image} />
 				<div>
@@ -54,7 +57,14 @@ const EntityContainer = styled.div`
 	align-items: center;
 	padding-left: 20px;
 	padding-right: 20px;
-	padding-bottom: 20px;
+	padding: 5px 20px 5px 20px;
+	margin-bottom: 5px;
+	cursor: pointer;
+	border-radius: 14px;
+
+	:hover{
+		background-color: rgba(255, 255, 255, 0.1);
+	}
 
 	section{
 		display: flex;
