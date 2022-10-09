@@ -6,23 +6,25 @@ import './assets/styles.css';
 import 'react-circular-progressbar/dist/styles.css';
 
 import { UserProvider } from './contexts/userContext.js';
-import { CompanyProvider } from './contexts/companyContext.js';
+import { UnitProvider } from './contexts/unitContext.js';
 
 import CompanyOverView from './pages/CompanyOverview/index.js';
-import UnitView from './pages/UnitView/index.js';
+import UnitView from './pages/Dashboard/UnitView.js';
+import AssetView from './pages/Dashboard/AssetView.js';
 
 export default function App() {
 	return (
 		<BrowserRouter>
 			<UserProvider>
-				<CompanyProvider>
+				<UnitProvider>
 					<Routes>
 						<Route path="/" element={<SignIn />} />
 						<Route path="/company/:companyId" element={<CompanyOverView />} />
-						<Route path="/unit/:id" element={<UnitView />} />
+						<Route path="/unit/:unitId" element={<UnitView />} />
+						<Route path="/asset/:assetId" element={<AssetView />} />
 
 					</Routes>
-				</CompanyProvider>
+				</UnitProvider>
 			</UserProvider>
 		</BrowserRouter>
 	);

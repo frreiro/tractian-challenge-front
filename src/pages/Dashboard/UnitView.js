@@ -1,20 +1,24 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import UserContext from '../../contexts/userContext.js';
-import useUnit from '../../hooks/api/useUnits.js';
 import MediaQuery from 'react-responsive';
 
 import SideMenu from '../../components/Overview/Menu/index.js';
-import { RocketOutlined } from '@ant-design/icons';
-import VerticalBannerAssets from '../../components/UnitOverview/VerticalBannerAssets/index.js';
-import ColumnChartAssetsBanner from '../../components/UnitOverview/ColumnChartAssetsBanner/index.js';
-import PieChartAssetsBanner from '../../components/UnitOverview/PieChartAssetsBanner/index.js';
+
 import { InfomationArea, TitleContainer, Dashboard, Main } from '../CompanyOverview/index.js';
+import useUnit from '../../hooks/api/useUnits.js';
+import PieChartAssetsBanner from '../../components/UnitOverview/PieChartAssetsBanner/index.js';
+import { GlobalOutlined } from '@ant-design/icons';
+import ColumnChartAssetsBanner from '../../components/UnitOverview/ColumnChartAssetsBanner/index.js';
+import VerticalBannerAssets from '../../components/UnitOverview/VerticalBannerAssets/index.js';
+import UnitContext from '../../contexts/unitContext.js';
 
 export default function UnitView() {
-	const { id } = useParams();
+	const { unitId } = useParams();
+
+	const { setUnitData } = useContext(UnitContext);
 	const { userData } = useContext(UserContext);
-	const { unit: unitAsync, unitIsLoading, getUnitInfo } = useUnit();
+	const { unit: unitAsync, unitError, unitIsLoading, getUnitInfo } = useUnit();
 	const [unit, setUnit] = useState(unitAsync);
 
 	useEffect(() => {
@@ -26,8 +30,9 @@ export default function UnitView() {
 	useEffect(() => {
 		(async () => {
 			try {
-				const unitData = await getUnitInfo(id, userData.token);
+				const unitData = await getUnitInfo(unitId, userData.token);
 				setUnit(unitData);
+				setUnitData(unitData);
 			} catch (e) {
 
 			}
@@ -43,7 +48,7 @@ export default function UnitView() {
 
 				<TitleContainer>
 					<div>
-						<RocketOutlined style={{ color: '#fff', fontSize: 45, marginRight: 22 }} />
+						<GlobalOutlined style={{ color: '#fff', fontSize: 45, marginRight: 22 }} />
 						<h1>{unit.name.toUpperCase()}</h1>
 					</div>
 					<p>{unit.company}</p>

@@ -19,13 +19,19 @@ const VerticalBannerContainer = styled.article`
 	flex-direction: column;
 	align-items: center;
 	margin-right: 30px;
-
+	padding-top: 43px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
 
 	h1{
 		font-weight: 500;
 		font-size: 20px;
-		padding-top: 43px;
 		color: white;
-		margin-bottom: 53px;
+		/*margin-bottom: 53px;*/
 	}
+`;
+
+export const BannerTitle = styled.h1`
+		margin-bottom: 53px;
 `;

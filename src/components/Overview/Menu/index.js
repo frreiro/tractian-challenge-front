@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
+import { GlobalOutlined, RocketOutlined } from '@ant-design/icons';
 
 export default function SideMenu({ entityTitle, entityArray }) {
 	const location = useLocation();
@@ -9,10 +10,16 @@ export default function SideMenu({ entityTitle, entityArray }) {
 		const currentLocation = location.pathname.split('/', 2).at(1);
 		if (currentLocation === 'company') return 'unit';
 		if (currentLocation === 'unit') return 'asset';
+		if (currentLocation === 'asset') return 'asset';
 	}
 
 	return (
 		<Menu>
+			<div>
+				<GlobalOutlined style={{ color: '#fff', fontSize: 45, marginRight: 22 }} onClick={() => navigate(-1)} />
+
+			</div>
+
 			<ul>
 				<Title>{entityTitle}</Title>
 				{entityArray?.map(entity => {
@@ -45,12 +52,18 @@ const Menu = styled.aside`
 	width: 262px;
 	height: 100vh;
 	border-right: 1px solid white;
-
+	/*padding-left: 10px;*/
 	ul{
 		padding-top: 280px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+	}
+
+	div{
+		padding-left: 40px;
+		padding-top: 50px;
+
 	}
 `;

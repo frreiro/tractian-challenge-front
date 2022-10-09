@@ -1,10 +1,10 @@
 import VerticalBanner from '../../VerticalBanner/index.js';
 import BannerEnitityStatus from './BannerEntityStatus.js';
-
+import { BannerTitle } from '../../VerticalBanner/index.js';
 export default function VerticalBannerAssets({ unit }) {
 	return (
 		<VerticalBanner>
-			<h1>{unit.name}'s assets</h1>
+			<BannerTitle>{unit.name}'s assets</BannerTitle>
 			{unit.assets.map(asset => {
 				return <BannerEnitityStatus
 					key={asset._id}
@@ -17,3 +17,4 @@ export default function VerticalBannerAssets({ unit }) {
 		</VerticalBanner>
 	);
 }
+

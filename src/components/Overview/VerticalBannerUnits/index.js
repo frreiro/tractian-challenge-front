@@ -1,10 +1,10 @@
 import BannerEnitityHealthLevel from './BannerEntityHealthLevel.js';
-import VerticalBanner from '../../VerticalBanner/index.js';
+import VerticalBanner, { BannerTitle } from '../../VerticalBanner/index.js';
 
 export default function VerticalBannerUnits({ units }) {
 	return (
 		<VerticalBanner>
-			<h1>Assets health level</h1>
+			<BannerTitle>Assets health level</BannerTitle>
 			{units?.map(unit => {
 				return unit.assets.map(asset => {
 					return <BannerEnitityHealthLevel
