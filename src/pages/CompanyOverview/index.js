@@ -13,10 +13,12 @@ import ColumnChartHealthLevelBanner from '../../components/Overview/ColumnChartH
 import UserContext from '../../contexts/userContext.js';
 import useCompanyOverview from '../../hooks/api/useCompanyOverview.js';
 import { useParams } from 'react-router';
+import CompanyContext from '../../contexts/companyContext.js';
 
 export default function CompanyOverView() {
 	const { companyId } = useParams();
 	const { userData } = useContext(UserContext);
+	const { setCompanyData: setCompanyContext } = useContext(CompanyContext);
 
 	const { companyData: companyDataAsync, companyDataIsLoading, getCompanyOverall } = useCompanyOverview();
 	const [companyData, setCompanyData] = useState(companyDataAsync);
@@ -32,6 +34,7 @@ export default function CompanyOverView() {
 			try {
 				const companyData = await getCompanyOverall(companyId, userData.token);
 				setCompanyData(companyData);
+				setCompanyContext(companyData);
 			} catch (e) {
 
 			}

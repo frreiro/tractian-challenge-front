@@ -11,20 +11,23 @@ import { UnitProvider } from './contexts/unitContext.js';
 import CompanyOverView from './pages/CompanyOverview/index.js';
 import UnitView from './pages/Dashboard/UnitView.js';
 import AssetView from './pages/Dashboard/AssetView.js';
+import { CompanyProvider } from './contexts/companyContext.js';
 
 export default function App() {
 	return (
 		<BrowserRouter>
 			<UserProvider>
-				<UnitProvider>
-					<Routes>
-						<Route path="/" element={<SignIn />} />
-						<Route path="/company/:companyId" element={<CompanyOverView />} />
-						<Route path="/unit/:unitId" element={<UnitView />} />
-						<Route path="/asset/:assetId" element={<AssetView />} />
+				<CompanyProvider>
+					<UnitProvider>
+						<Routes>
+							<Route path="/" element={<SignIn />} />
+							<Route path="/company/:companyId" element={<CompanyOverView />} />
+							<Route path="/unit/:unitId" element={<UnitView />} />
+							<Route path="/asset/:assetId" element={<AssetView />} />
 
-					</Routes>
-				</UnitProvider>
+						</Routes>
+					</UnitProvider>
+				</CompanyProvider>
 			</UserProvider>
 		</BrowserRouter>
 	);
