@@ -31,6 +31,7 @@ export default function UnitView() {
 		(async () => {
 			try {
 				const unitData = await getUnitInfo(unitId, userData.token);
+				localStorage.setItem('unit', JSON.stringify(unitData));
 				setUnit(unitData);
 				setUnitData(unitData);
 			} catch (e) {

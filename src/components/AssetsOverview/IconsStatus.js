@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { PlayCircleOutlined, CloseCircleOutlined, WarningOutlined } from '@ant-design/icons';
 
-export default function IconsStatus() {
+export default function IconsStatus({ updateStatus }) {
 	return (
 		<IconsContainer>
-			<CloseCircleOutlined style={{ color: '#EF1515', fontSize: 38 }} />
-			<WarningOutlined style={{ color: '#FEE611', fontSize: 38 }} />
-			<PlayCircleOutlined style={{ color: '#0AFF31', fontSize: 38 }} />
+			<CloseCircleOutlined style={{ color: '#EF1515', fontSize: 38 }} onClick={() => updateStatus('Stopped')} />
+			<WarningOutlined style={{ color: '#FEE611', fontSize: 38 }} onClick={() => updateStatus('Alerting')} />
+			<PlayCircleOutlined style={{ color: '#0AFF31', fontSize: 38 }} onClick={() => updateStatus('Running')} />
 
 		</IconsContainer>
 	);

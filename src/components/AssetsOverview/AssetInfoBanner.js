@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import IconsStatus from './IconsStatus.js';
 import MediaQuery from 'react-responsive';
 
-export default function AssetInfoBanner({ asset }) {
+export default function AssetInfoBanner({ asset, updateStatus }) {
 	return (
 		<VerticalBanner>
 			<AssetImage src={asset.image} />
@@ -31,7 +31,7 @@ export default function AssetInfoBanner({ asset }) {
 				<p>{asset.description}</p>
 			</AssetMain>
 			<MediaQuery maxWidth={760}>
-				<IconsStatus />
+				<IconsStatus updateStatus={updateStatus} />
 			</MediaQuery>
 		</VerticalBanner>
 	);

@@ -11,16 +11,18 @@ import AssetInfoBanner from '../../components/AssetsOverview/AssetInfoBanner.js'
 import AssetStatusBanner from '../../components/AssetsOverview/AssetStatusBanner.js';
 import AssetHealthLevelBanner from '../../components/AssetsOverview/AssetHalthLevelBanner.js';
 import UnitContext from '../../contexts/unitContext.js';
+import useUpdateAsset from '../../hooks/api/useUpdateAsset.js';
 
 export default function AssetView() {
 	const { assetId } = useParams();
 
 	const { userData } = useContext(UserContext);
 	const { unitData } = useContext(UnitContext);
-	const { asset: assetAsync, assetIsLoading, getAsset } = useAsset();
-	const [asset, setAsset] = useState(assetAsync);
 
-	//console.log(asset);
+	const { asset: assetAsync, assetIsLoading, getAsset } = useAsset();
+	const { updatedAssetIsLoading, updateAsset } = useUpdateAsset();
+
+	const [asset, setAsset] = useState(assetAsync);
 
 	useEffect(() => {
 		if (assetAsync) {
@@ -37,7 +39,15 @@ export default function AssetView() {
 
 			}
 		})();
-	}, [assetId]);
+	}, [assetId, updatedAssetIsLoading]);
+
+	async function changeAssetStatus(status) {
+		try {
+			await updateAsset(assetId, { status }, userData.token);
+		} catch (e) {
+
+		}
+	}
 
 	return assetIsLoading ? 'Carregando...' : (
 		<Main>
@@ -54,11 +64,11 @@ export default function AssetView() {
 					<p>{unitData.company}</p>
 				</TitleContainer>
 				<InfomationArea>
-					<AssetInfoBanner asset={asset} />
+					<AssetInfoBanner asset={asset} updateStatus={changeAssetStatus} />
 					<div className='horizontalBannersContainer'>
 						<MediaQuery minWidth={760}>
 							<AssetHealthLevelBanner porcentage={asset.health_level} />
-							<AssetStatusBanner status={asset.status} />
+							<AssetStatusBanner asset={asset} updateStatus={changeAssetStatus} />
 						</MediaQuery>
 					</div>
 				</InfomationArea>

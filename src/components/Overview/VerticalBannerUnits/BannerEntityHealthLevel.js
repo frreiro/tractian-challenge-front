@@ -16,14 +16,14 @@ export default function BannerEnitityHealthLevel({ name, image, unit, healthLeve
 	);
 }
 
-const EntityTitle = styled.p`
+export const EntityTitle = styled.p`
 	font-weight: 500;
 	font-size: 15px;
 	font-style: normal;
 	color: white;
 `;
 
-const EntitySubtitle = styled.p`
+export const EntitySubtitle = styled.p`
 	font-weight: 300;
 	font-size: 10px;
 	font-style: normal;
@@ -31,7 +31,7 @@ const EntitySubtitle = styled.p`
 
 `;
 
-const EntityImage = styled.img`
+export const EntityImage = styled.img`
 	width: 46px;
 	height: 46px;
 	border-radius: 50%;
@@ -39,14 +39,21 @@ const EntityImage = styled.img`
 	margin-right: 14px;
 `;
 
-const EntityContainer = styled.div`
+export const EntityContainer = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding-left: 20px;
 	padding-right: 20px;
-	padding-bottom: 20px;
+	padding: 5px 20px 5px 20px;
+	margin-bottom: 5px;
+	cursor: pointer;
+	border-radius: 14px;
+
+	:hover{
+		background-color: rgba(255, 255, 255, 0.1);
+	}
 
 	section{
 		display: flex;

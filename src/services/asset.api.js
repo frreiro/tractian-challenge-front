@@ -20,3 +20,13 @@ export async function postNewAsset(body, token) {
 
 	return response.data;
 }
+
+export async function updateAsset(assetId, body, token) {
+	const response = await api.put(`/assets/${assetId}`, body, {
+		headers: {
+			'Authorization': `Bearer ${token}`,
+		},
+	});
+
+	return response.data;
+}
