@@ -12,7 +12,9 @@ export default function VerticalBannerUnits({ units }) {
 						name={asset.name}
 						image={asset.image}
 						healthLevel={asset.health_level}
+						id={asset._id}
 						unit={unit.name}
+						unitId={unit._id}
 					/>;
 				});
 			})}

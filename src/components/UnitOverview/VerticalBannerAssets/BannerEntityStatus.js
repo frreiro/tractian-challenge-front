@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { CheckOutlined, CloseOutlined, WarningOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router';
 import { EntityContainer, EntityImage, EntitySubtitle, EntityTitle } from '../../Overview/VerticalBannerUnits/BannerEntityHealthLevel.js';

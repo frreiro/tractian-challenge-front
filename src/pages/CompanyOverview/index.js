@@ -33,6 +33,7 @@ export default function CompanyOverView() {
 		(async () => {
 			try {
 				const companyData = await getCompanyOverall(companyId, userData.token);
+				localStorage.setItem('company', JSON.stringify(companyData));
 				setCompanyData(companyData);
 				setCompanyContext(companyData);
 			} catch (e) {

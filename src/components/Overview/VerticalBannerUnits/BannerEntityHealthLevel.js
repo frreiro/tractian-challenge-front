@@ -1,9 +1,20 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router';
 import BannerProgressBar from './BannerProgressBar.js';
+import { useContext } from 'react';
+import UnitContext from '../../../contexts/unitContext.js';
 
-export default function BannerEnitityHealthLevel({ name, image, unit, healthLevel }) {
+export default function BannerEnitityHealthLevel({ name, image, unit, healthLevel, id, unitId }) {
+	const navigate = useNavigate();
+	const { setUnitId } = useContext(UnitContext);
+
+	function redirectToAsset() {
+		setUnitId(unitId);
+		navigate('/asset/' + id);
+	}
+
 	return (
-		<EntityContainer>
+		<EntityContainer onClick={redirectToAsset}>
 			<section>
 				<EntityImage src={image} />
 				<div>
