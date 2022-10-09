@@ -1,4 +1,4 @@
-export default function createAssetsStatusIterableFormat(entityArray) {
+export default function createAssetsStatusIterableFormatByCompany(entityArray) {
 	const status = {};
 
 	entityArray.forEach(unit => {

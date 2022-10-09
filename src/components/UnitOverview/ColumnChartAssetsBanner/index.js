@@ -1,13 +1,13 @@
 import BasicColumnChart from '../../charts/BasicColumChart/index.js';
 import HorizontalBanner from '../../HorizontalBanner/index.js';
 
-export default function ColumnChartUnitsBanner({ entityArray }) {
+export default function ColumnChartAssetsBanner({ unit }) {
 	const options = {
 		chart: {
 			type: 'column',
 		},
 		title: {
-			text: 'Assets by units',
+			text: 'Assets health level',
 		},
 
 		yAxis: {
@@ -16,10 +16,10 @@ export default function ColumnChartUnitsBanner({ entityArray }) {
 			},
 		},
 		xAxis: {
-			categories: entityArray.map(unit => unit.name)
+			categories: unit.assets.map(asset => asset.name),
 		},
 		series: [{
-			data: entityArray.map(unit => unit.assets.length),
+			data: unit.assets.map(asset => parseFloat(asset.health_level)),
 			color: 'white'
 		}]
 	};

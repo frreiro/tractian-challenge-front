@@ -1,15 +1,19 @@
 
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { GlobalOutlined } from '@ant-design/icons';
 import MediaQuery from 'react-responsive';
 
 import SideMenu from '../../components/Overview/Menu/index.js';
-import VerticalBanner from '../../components/VerticalBanner/index.js';
+import VerticalBannerUnits from '../../components/Overview/VerticalBannerUnits/index.js';
 import CompanyContext from '../../contexts/companyContext.js';
 import ColumnChartUnitsBanner from '../../components/Overview/ColumnChartUnitsBanner/index.js';
 import PieChartStatusBanner from '../../components/Overview/PieCharStatusBanner/index.js';
 import ColumnChartHealthLevelBanner from '../../components/Overview/ColumnChartHalthLevelBanner/index.js';
+
+import UserContext from '../../contexts/userContext.js';
+import useCompanyOverview from '../../hooks/api/useCompanyOverview.js';
+import { useNavigate, useParams } from 'react-router';
 
 const companyData = {
 	'_id': '63406b5e661dc129a26bba75',
@@ -76,41 +80,62 @@ const companyData = {
 };
 
 export default function CompanyOverView() {
-	const { companyData } = useContext(CompanyContext);
-	console.log(companyData);
+	const { companyId } = useParams();
+	const { userData } = useContext(UserContext);
 
-	return (
-		<CompanyGeneral>
-			<MediaQuery minWidth={1000}>
-				<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} />
-			</MediaQuery>
-			<CompanyInfos>
+	const { companyData: companyDataAsync, companyDataIsLoading, getCompanyOverall } = useCompanyOverview();
+	const [companyData, setCompanyData] = useState(companyDataAsync);
 
-				<TitleContainer>
-					<div>
-						<GlobalOutlined style={{ color: '#fff', fontSize: 45, marginRight: 22 }} />
-						<h1>OVERVIEW</h1>
-					</div>
-					<p>{companyData.name}</p>
-				</TitleContainer>
-				<InfomationArea>
-					<MediaQuery minWidth={760}>
-						<VerticalBanner units={companyData.units} />
-					</MediaQuery>
-					<div className='horizontalBannersContainer'>
-						<ColumnChartUnitsBanner entityArray={companyData.units} />
-						<PieChartStatusBanner entityArray={companyData.units} />
-						<MediaQuery maxWidth={760}>
-							<ColumnChartHealthLevelBanner entityArray={companyData.units} />
+	useEffect(() => {
+		if (companyDataAsync) {
+			setCompanyData(companyDataAsync);
+		}
+	}, [companyDataAsync]);
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const companyData = await getCompanyOverall(companyId, userData.token);
+				setCompanyData(companyData);
+				console.log(companyData);
+			} catch (e) {
+
+			}
+		})();
+	}, []);
+
+	return companyDataIsLoading ? 'Carregando...' :
+		(
+			<Main>
+				<MediaQuery minWidth={1000}>
+					<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} />
+				</MediaQuery>
+				<Dashboard>
+					<TitleContainer>
+						<div>
+							<GlobalOutlined style={{ color: '#fff', fontSize: 45, marginRight: 22 }} />
+							<h1>OVERVIEW</h1>
+						</div>
+						<p>{companyData.name}</p>
+					</TitleContainer>
+					<InfomationArea>
+						<MediaQuery minWidth={760}>
+							<VerticalBannerUnits units={companyData.units} />
 						</MediaQuery>
-					</div>
-				</InfomationArea>
-			</CompanyInfos>
-		</CompanyGeneral>
-	);
+						<div className='horizontalBannersContainer'>
+							<ColumnChartUnitsBanner entityArray={companyData.units} />
+							<PieChartStatusBanner entityArray={companyData.units} />
+							<MediaQuery maxWidth={760}>
+								<ColumnChartHealthLevelBanner entityArray={companyData.units} />
+							</MediaQuery>
+						</div>
+					</InfomationArea>
+				</Dashboard>
+			</Main>
+		);
 }
 
-const InfomationArea = styled.div`
+export const InfomationArea = styled.div`
 	padding-top: 50px;
 	display: flex;
 
@@ -122,7 +147,7 @@ const InfomationArea = styled.div`
 	}
 `;
 
-const TitleContainer = styled.div`
+export const TitleContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -148,14 +173,14 @@ const TitleContainer = styled.div`
 	}
 `;
 
-const CompanyInfos = styled.main`	
+export const Dashboard = styled.main`	
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 `;
 
-const CompanyGeneral = styled.div`
+export const Main = styled.div`
 	display: flex;
 
 `;

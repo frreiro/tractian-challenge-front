@@ -1,9 +1,9 @@
 import PieChart from '../../charts/PieChart/index.js';
 import HorizontalBanner from '../../HorizontalBanner/index.js';
-import createAssetsStatusIterableFormatByCompany from './calculateAssetsQuantityByCompany.js';
+import createAssetsStatusIterableFormatByUnit from './calculateAsssetsQuantityByUnit.js';
 
-export default function PieChartStatusBanner({ entityArray }) {
-	const iterablePieFormat = createAssetsStatusIterableFormatByCompany(entityArray);
+export default function PieChartAssetsBanner({ unit }) {
+	const iterablePieFormat = createAssetsStatusIterableFormatByUnit(unit);
 
 	const options = {
 		chart: {

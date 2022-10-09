@@ -1,4 +1,4 @@
-import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
+import { CircularProgressbar } from 'react-circular-progressbar';
 import styled from 'styled-components';
 
 export default function BannerProgressBar({ porcentage }) {

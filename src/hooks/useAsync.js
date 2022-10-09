@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 export default function useAsync(apiFuncion, isImmediate = true) {
 	const [data, setData] = useState(null);
-	const [isLoading, setisLoading] = useState(isImmediate);
+	const [isLoading, setisLoading] = useState(!isImmediate);
 	const [error, setError] = useState(null);
 
 	const asyncFunc = async (...args) => {
@@ -25,8 +25,6 @@ export default function useAsync(apiFuncion, isImmediate = true) {
 		if (isImmediate) {
 			asyncFunc();
 		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {

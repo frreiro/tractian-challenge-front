@@ -6,8 +6,10 @@ import './assets/styles.css';
 import 'react-circular-progressbar/dist/styles.css';
 
 import { UserProvider } from './contexts/userContext.js';
-import CompanyOverView from './pages/CompanyOverview/index.js';
 import { CompanyProvider } from './contexts/companyContext.js';
+
+import CompanyOverView from './pages/CompanyOverview/index.js';
+import UnitView from './pages/UnitView/index.js';
 
 export default function App() {
 	return (
@@ -16,7 +18,9 @@ export default function App() {
 				<CompanyProvider>
 					<Routes>
 						<Route path="/" element={<SignIn />} />
-						<Route path="/company" element={<CompanyOverView />} />
+						<Route path="/company/:companyId" element={<CompanyOverView />} />
+						<Route path="/unit/:id" element={<UnitView />} />
+
 					</Routes>
 				</CompanyProvider>
 			</UserProvider>

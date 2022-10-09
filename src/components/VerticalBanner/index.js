@@ -1,22 +1,9 @@
 import styled from 'styled-components';
-import BannerEnitity from './BannerEntity.js';
 
-export default function VerticalBanner({ units }) {
+export default function VerticalBanner({ children }) {
 	return (
 		<VerticalBannerContainer>
-			<h1>Assets health level</h1>
-			{units?.map(unit => {
-				return unit.assets.map(asset => {
-					return <BannerEnitity
-						key={asset._id}
-						name={asset.name}
-						image={asset.image}
-						healthLevel={asset.health_level}
-						unit={unit.name}
-					/>;
-				});
-			})}
-
+			{children}
 		</VerticalBannerContainer>
 	);
 }

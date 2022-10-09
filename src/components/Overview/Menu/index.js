@@ -1,18 +1,23 @@
+import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
-const items = [
-	{ label: 'item 1', key: 'item-1' }, // remember to pass the key prop
-	{ label: 'item 2', key: 'item-2' }, // which is required
-	{ label: 'item 3', key: 'item-3' },
-];
 
 export default function SideMenu({ entityTitle, entityArray }) {
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	function setNextRoute() {
+		const currentLocation = location.pathname.split('/', 2).at(1);
+		if (currentLocation === 'company') return 'unit';
+		if (currentLocation === 'unit') return 'asset';
+	}
+
 	return (
 		<Menu>
 			<ul>
 				<Title>{entityTitle}</Title>
-				{entityArray.map(entity => {
+				{entityArray?.map(entity => {
 					return (
-						<TitleEntity key={entity._id}>{entity.name}</TitleEntity>
+						<TitleEntity key={entity._id} onClick={() => navigate(`/${setNextRoute()}/${entity._id}`)}>{entity.name}</TitleEntity>
 					);
 				})}
 			</ul>
@@ -33,7 +38,7 @@ const TitleEntity = styled.li`
 	font-size: 25px;
 	line-height: 52px;
 	color: white;
-
+	cursor: pointer;
 `;
 
 const Menu = styled.aside`

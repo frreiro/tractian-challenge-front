@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import BannerProgressBar from './BannerProgressBar.js';
 
-export default function BannerEnitity({ name, image, unit, healthLevel }) {
+export default function BannerEnitityHealthLevel({ name, image, unit, healthLevel }) {
 	return (
 		<EntityContainer>
 			<section>

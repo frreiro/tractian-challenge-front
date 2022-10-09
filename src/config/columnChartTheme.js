@@ -39,6 +39,9 @@ const customTheme = {
 	plotOptions: {
 		column: {
 			showInLegend: false,
+		},
+		bar: {
+			showInLegend: false,
 		}
 	},
 	series: [{

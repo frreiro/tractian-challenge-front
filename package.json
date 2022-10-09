@@ -30,9 +30,15 @@
 		"rules": {
 			"react-hooks/exhaustive-deps": "off",
 			"react-hooks/rules-of-hooks": "off",
+			"template-curly-spacing": "off",
 			"indent": [
 				"error",
-				"tab"
+				"tab",
+				{
+					"ignoredNodes": [
+						"TemplateLiteral"
+					]
+				}
 			],
 			"linebreak-style": 0,
 			"quotes": [
