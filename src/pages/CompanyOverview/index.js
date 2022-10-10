@@ -51,7 +51,7 @@ export default function CompanyOverView() {
 				<Dashboard>
 					<TitleContainer>
 						<div>
-							<GlobalOutlined style={{ color: '#fff', fontSize: 45, marginRight: 22 }} />
+							<GlobalOutlined style={{ color: '#fff', fontSize: 35, marginRight: 22 }} />
 							<h1>OVERVIEW</h1>
 						</div>
 						<p>{companyData.name}</p>
@@ -99,18 +99,11 @@ export const TitleContainer = styled.div`
 
 	h1{
 		font-weight: 700;
-		font-size: 50px;
+		font-size: 35px;
 		color: white;
 
 
 	}
-	/*h1:hover + .edt {
-		display: block;
-	}
-	
-	.edt{
-		display: none;
-	}*/
 
 	p{
 		font-weight: 500;

@@ -24,13 +24,13 @@ const StatusInfo = styled.div`
 	justify-content: center;
 
 	h1{
-		font-size: 40px;
+		font-size: 30px;
 		padding-bottom: 15px;
 		color: white;
 	}
 
 	p{
-		font-size: 30px;
+		font-size: 25px;
 		font-weight: 500;
 		color: white;
 

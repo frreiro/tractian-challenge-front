@@ -11,16 +11,12 @@ const customTheme = {
 	title: {
 		style: {
 			color: '#fff',
-			fontSize: '20px',
 			fontWeight: '500'
 		},
-		margin: 50,
-		y: 50
 	},
 
 	yAxis: {
 		gridLineColor: 'white',
-		gridLineWidth: 2,
 		labels: {
 			style: {
 				color: 'white'
@@ -31,7 +27,6 @@ const customTheme = {
 		color: 'white',
 		labels: {
 			style: {
-				fontSize: '15px',
 				color: 'white'
 			}
 		},

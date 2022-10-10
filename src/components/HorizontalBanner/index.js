@@ -9,8 +9,8 @@ export default function HorizontalBanner({ children }) {
 }
 
 const HorizontalBannerContainer = styled.article`
-	width: 540px;
-	max-height: 245px;
+	width: 420px;
+	max-height: 190px;
 	background-color: #3525EB;
 	border-radius: 10px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -21,10 +21,6 @@ const HorizontalBannerContainer = styled.article`
 	justify-content: center;
 	padding: 10px;
 
-	.highcharts-root{
-		padding: 10px;
-
-	}
 	.highcharts-root{
 		width: 100%;
 		height: 100%;

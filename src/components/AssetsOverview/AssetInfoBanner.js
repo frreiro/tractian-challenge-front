@@ -49,16 +49,21 @@ export default function AssetInfoBanner({ asset, updateAsset }) {
 
 const AssetMain = styled.div`
 	width: 100%;
-	padding-top: 40px;
+	padding-top: 30px;
+
+	h1{	
+		font-size: 15px;
+	}
 
 	p{
+		font-size: 15px;
 		color: white;
 	}
 `;
 
 const AssetImage = styled.div`
-	width: 160px;
-	height: 160px;
+	width: 100px;
+	height: 100px;
 
 	border-radius: 50%;
 	
@@ -73,7 +78,7 @@ const AssetInfo = styled.div`
 	align-items: center;
 	padding-bottom: 20px;
 
-	h1{
+	h1{	
 		padding-right: 10px;
 	}
 

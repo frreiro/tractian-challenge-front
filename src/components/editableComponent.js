@@ -28,19 +28,20 @@ export default function EditableComponent({ children, submitFuncion }) {
 	return (
 		<EditableContainer canEdit={canEdit} onClick={() => canEdit ? ' ' : setCanEdit(true)}>
 			{canEdit ?
-				<CircularInput value={gapValue(value)}
+				<CircularInput radius={70} value={gapValue(value)}
 					onChange={(value) => setValue(gapValue(value))}
 					onChangeEnd={onSubmit}
 
 				>
-					<CircularTrack strokeWidth={5} stroke="#eee" />
+					<CircularTrack strokeWidth={4} stroke="#eee" />
 					<CircularProgress />
 					<CircularThumb />
-					<text x={100} y={100}
+					<text x={70} y={70}
 						textAnchor="middle"
 						dy="0.3em"
 						fontWeight="500"
-						fontSize={40}
+						fontSize={25}
+						textAlign="center"
 						fill={'white'}
 						fontFamily={'Poppins'}>
 						{getPercentage()}%

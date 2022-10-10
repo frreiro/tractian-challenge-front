@@ -46,10 +46,9 @@ export default function UnitView() {
 				<SideMenu entityTitle={'Assets'} entityArray={unit.assets} />
 			</MediaQuery>
 			<Dashboard>
-
 				<TitleContainer>
 					<div>
-						<GlobalOutlined style={{ color: '#fff', fontSize: 45, marginRight: 22 }} />
+						<GlobalOutlined style={{ color: '#fff', fontSize: 35, marginRight: 22 }} />
 						<h1>{unit.name.toUpperCase()}</h1>
 					</div>
 					<p>{unit.company}</p>

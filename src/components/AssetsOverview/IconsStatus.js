@@ -4,9 +4,9 @@ import { PlayCircleOutlined, CloseCircleOutlined, WarningOutlined } from '@ant-d
 export default function IconsStatus({ updateStatus }) {
 	return (
 		<IconsContainer>
-			<CloseCircleOutlined style={{ color: '#EF1515', fontSize: 38 }} onClick={() => updateStatus({ status: 'Stopped' })} />
-			<WarningOutlined style={{ color: '#FEE611', fontSize: 38 }} onClick={() => updateStatus({ status: 'Alerting' })} />
-			<PlayCircleOutlined style={{ color: '#0AFF31', fontSize: 38 }} onClick={() => updateStatus({ status: 'Running' })} />
+			<CloseCircleOutlined style={{ color: '#EF1515', fontSize: 20 }} onClick={() => updateStatus({ status: 'Stopped' })} />
+			<WarningOutlined style={{ color: '#FEE611', fontSize: 20 }} onClick={() => updateStatus({ status: 'Alerting' })} />
+			<PlayCircleOutlined style={{ color: '#0AFF31', fontSize: 20 }} onClick={() => updateStatus({ status: 'Running' })} />
 
 		</IconsContainer>
 	);

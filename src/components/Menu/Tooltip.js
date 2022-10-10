@@ -72,13 +72,13 @@ const TooltopContainer = styled.div`
 /* Absolute positioning */
 .Tooltip-Tip.right {
   left: calc(100% + var(--tooltip-margin));
-  top: 50%;
+  top: 0;
   transform: translateX(0) translateY(-40%);
 }
 /* CSS border triangles */
 .Tooltip-Tip.right::before {
   left: calc(var(--tooltip-arrow-size) * -1);
-  top: 50%;
+  bottom: 15%;
   transform: translateX(0) translateY(-50%);
   border-right-color: var(--tooltip-background-color);
 }

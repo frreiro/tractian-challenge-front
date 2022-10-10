@@ -35,21 +35,21 @@ const Title = styled.h1`
 
 	font-style: normal;
 	font-weight: 700;
-	font-size: 35px;
+	font-size: 25px;
 	padding-bottom: 25px;
 	color: white;
 	`;
 
 const ProgressbarContainer = styled.div`
-	width: 190px;
-	height: 190px;
+	width: 140px;
+	height: 140px;
 `;
 
 const HorizontalBanner = styled.article`
-	width: 540px;
+	width: 420px;
 	height: 100%;
-	
 	display: flex;
+
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
