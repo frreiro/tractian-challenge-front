@@ -258,9 +258,6 @@ const Menu = styled.aside`
 		position:absolute;
 		background-color: var(--banners-color);
 		z-index: 2;
-
-
-
     }
 
 	h1{
