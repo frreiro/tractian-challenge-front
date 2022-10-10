@@ -101,7 +101,16 @@ export const TitleContainer = styled.div`
 		font-weight: 700;
 		font-size: 50px;
 		color: white;
+
+
 	}
+	/*h1:hover + .edt {
+		display: block;
+	}
+	
+	.edt{
+		display: none;
+	}*/
 
 	p{
 		font-weight: 500;

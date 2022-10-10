@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import HorizontalBanner from '../HorizontalBanner/index.js';
 import IconsStatus from './IconsStatus.js';
 
-export default function AssetStatusBanner({ asset, updateStatus }) {
+export default function AssetStatusBanner({ asset, updateAsset }) {
 	return (
 		<HorizontalBanner>
 			<Container>
-				<IconsStatus updateStatus={updateStatus} />
+				<IconsStatus updateStatus={updateAsset} />
 				<StatusInfo>
 					<h1>Status:</h1>
 					<p>{asset.status}</p>

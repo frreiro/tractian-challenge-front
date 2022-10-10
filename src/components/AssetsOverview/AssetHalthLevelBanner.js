@@ -1,25 +1,31 @@
 import { CircularProgressbar } from 'react-circular-progressbar';
 import styled from 'styled-components';
+import EditableComponent from '../editableComponent.js';
 
-export default function AssetHealthLevelBanner({ porcentage }) {
+export default function AssetHealthLevelBanner({ porcentage, updateAsset }) {
 	return (
 		<HorizontalBanner>
 			<Title>Health Level</Title>
 			<ProgressbarContainer>
-				<CircularProgressbar value={porcentage} text={`${porcentage}%`} strokeWidth={10} styles={{
-					path: {
-						stroke: '#fff',
-					},
-					trail: {
-						stroke: 'none',
-					},
-					text: {
-						fontFamily: 'Poppins',
-						fontWeight: 500,
-						fontSize: '25px',
-						fill: '#fff'
-					},
-				}} />
+				<EditableComponent submitFuncion={(value) => updateAsset({ health_level: value })}>
+					<CircularProgressbar value={porcentage} text={`${porcentage}%`} strokeWidth={10} styles={{
+						path: {
+							stroke: '#fff',
+							cursor: 'pointer'
+						},
+						trail: {
+							stroke: 'none',
+							cursor: 'pointer'
+						},
+						text: {
+							fontFamily: 'Poppins',
+							fontWeight: 500,
+							fontSize: '25px',
+							fill: '#fff',
+							cursor: 'pointer'
+						},
+					}} />
+				</EditableComponent>
 			</ProgressbarContainer>
 		</HorizontalBanner>
 	);

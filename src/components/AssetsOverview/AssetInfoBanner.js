@@ -2,24 +2,32 @@ import VerticalBanner from '../VerticalBanner/index.js';
 import styled from 'styled-components';
 import IconsStatus from './IconsStatus.js';
 import MediaQuery from 'react-responsive';
+import EditableText from '../editableText.js';
 
-export default function AssetInfoBanner({ asset, updateStatus }) {
+export default function AssetInfoBanner({ asset, updateAsset }) {
 	return (
 		<VerticalBanner>
 			<AssetImage src={asset.image} />
 			<AssetMain>
 				<AssetInfo>
 					<h1>Model:</h1>
-					<p>{asset.model}</p>
+					<EditableText submitFuncion={(text) => updateAsset({ model: text })}>
+						<p>{asset.model}</p>
+					</EditableText>
 				</AssetInfo>
 				<AssetInfo>
 					<h1>Owner:</h1>
-					<p>{asset.owner}</p>
+					<EditableText submitFuncion={(text) => updateAsset({ owner: text })}>
+						<p>{asset.owner}</p>
+					</EditableText>
+
 				</AssetInfo>
 				<MediaQuery maxWidth={760}>
 					<AssetInfo>
 						<h1>Health Level:</h1>
-						<p>{asset.health_level}%</p>
+						<EditableText submitFuncion={(text) => updateAsset({ health_level: text })}>
+							<p>{asset.health_level}%</p>
+						</EditableText>
 					</AssetInfo>
 				</MediaQuery>
 				<AssetInfo>
@@ -28,10 +36,12 @@ export default function AssetInfoBanner({ asset, updateStatus }) {
 				</AssetInfo>
 
 				<h1>Description:</h1>
-				<p>{asset.description}</p>
+				<EditableText submitFuncion={(text) => updateAsset({ description: text })}>
+					<p>{asset.description}</p>
+				</EditableText>
 			</AssetMain>
 			<MediaQuery maxWidth={760}>
-				<IconsStatus updateStatus={updateStatus} />
+				<IconsStatus updateStatus={updateAsset} />
 			</MediaQuery>
 		</VerticalBanner>
 	);
