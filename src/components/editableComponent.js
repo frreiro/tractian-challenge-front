@@ -1,5 +1,4 @@
-import { EditOutlined, CloseOutlined } from '@ant-design/icons';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import {
 	CircularInput,
@@ -14,7 +13,6 @@ export default function EditableComponent({ children, submitFuncion }) {
 
 	function onSubmit(e) {
 		submitFuncion(getPercentage());
-		setCanEdit(false);
 	}
 
 	function gapValue(value) {
@@ -26,12 +24,11 @@ export default function EditableComponent({ children, submitFuncion }) {
 	}
 
 	return (
-		<EditableContainer canEdit={canEdit} onClick={() => canEdit ? ' ' : setCanEdit(true)}>
+		<EditableContainer onClick={() => canEdit ? ' ' : setCanEdit(true)}>
 			{canEdit ?
 				<CircularInput radius={70} value={gapValue(value)}
 					onChange={(value) => setValue(gapValue(value))}
 					onChangeEnd={onSubmit}
-
 				>
 					<CircularTrack strokeWidth={4} stroke="#eee" />
 					<CircularProgress />
@@ -41,7 +38,6 @@ export default function EditableComponent({ children, submitFuncion }) {
 						dy="0.3em"
 						fontWeight="500"
 						fontSize={25}
-						textAlign="center"
 						fill={'white'}
 						fontFamily={'Poppins'}>
 						{getPercentage()}%
