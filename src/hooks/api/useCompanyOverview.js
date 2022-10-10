@@ -1,4 +1,4 @@
-import getCompanyOverview from '../../services/companies.api.js';
+import { getCompanyOverview } from '../../services/companies.api.js';
 import useAsync from '../useAsync.js';
 
 export default function useCompanyOverview() {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import styled from 'styled-components';
 
@@ -6,11 +6,23 @@ import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import 'swiper/modules/pagination/pagination.min.css';
 
+import { PlusCircleFilled } from '@ant-design/icons';
+
 import useUsers from '../../hooks/api/useUsers.js';
+import Tooltip from '../Menu/Tooltip.js';
+import CreateAsset from '../Menu/CreateAsset.js';
+import CreateUser from '../Menu/CreateUser.js';
 
 //TODO: tratar os loading e erros
 export default function UserSwiper({ selectUser }) {
-	const { users, usersIsLoading, usersError } = useUsers();
+	const { users: oldUsers, usersIsLoading, usersError } = useUsers();
+	const [users, setNewUsers] = useState(oldUsers);
+
+	useEffect(() => {
+		if (oldUsers) {
+			setNewUsers(oldUsers);
+		}
+	}, [oldUsers]);
 
 	return (
 		<SwiperWrapper>
@@ -18,7 +30,7 @@ export default function UserSwiper({ selectUser }) {
 				slidesPerView={3}
 				spaceBetween={0}
 				centeredSlides={true}
-				loop={true}
+				//loop={true}
 				updateOnWindowResize={true}
 				direction={'vertical'}
 				breakpoints={{
@@ -41,8 +53,13 @@ export default function UserSwiper({ selectUser }) {
 						</SwiperSlide>
 					);
 				})}
+				<SwiperSlide >
+					<Tooltip content={<CreateUser setNewUsers={(users) => setNewUsers(users)} />}>
+						<PlusCircleFilled style={{ color: '#fff', fontSize: 60, marginTop: 10, cursor: 'pointer' }} />
+					</Tooltip>
+				</SwiperSlide>
 			</Swiper>
-		</SwiperWrapper>
+		</SwiperWrapper >
 	);
 }
 

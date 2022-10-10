@@ -1,8 +1,5 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import CompanyContext from '../../contexts/companyContext.js';
-import UserContext from '../../contexts/userContext.js';
-import useNewUnit from '../../hooks/api/useNewUnit.js';
 
 export default function TooltipElement({ formSubmit, type }) {
 	const [inputText, setInputText] = useState(null);
@@ -22,7 +19,7 @@ export default function TooltipElement({ formSubmit, type }) {
 	);
 }
 
-const Container = styled.div`
+export const Container = styled.div`
 
 	label{
 		font-weight: 500;

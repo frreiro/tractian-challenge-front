@@ -5,12 +5,14 @@ export default function useUsers() {
 	const {
 		data: users,
 		error: usersError,
-		isLoading: usersIsLoading
+		isLoading: usersIsLoading,
+		asyncFunc: getAllUsersAsync,
 	} = useAsync(getAllUsers);
 
 	return {
 		users,
 		usersError,
-		usersIsLoading
+		usersIsLoading,
+		getAllUsersAsync
 	};
 }

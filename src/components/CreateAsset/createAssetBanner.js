@@ -39,7 +39,7 @@ export default function CreateAssetBanner({ assetName }) {
 
 	return (
 		<VerticalBanner>
-			<AssetForm onSubmit={handleSubmit(onSubmit)} enctype="multipart/form-data">
+			<AssetForm onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
 				<UploadElement>
 					<UploadLabel htmlFor='fileType'>Upload Foto</UploadLabel>
 					<input type="file" id="fileType" accept='image/*'{...register('image')} />
