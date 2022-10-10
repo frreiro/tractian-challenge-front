@@ -15,3 +15,24 @@ export async function getAllCompanies() {
 
 	return response.data;
 }
+
+export async function deleteCompany(companyId, token) {
+	const response = await api.delete(`/company/${companyId}`, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	return response.data;
+}
+
+export async function createCompany(body, token) {
+	const response = await api.post('/company', body, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	return response.data;
+}
+

@@ -1,7 +1,7 @@
 
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { GlobalOutlined } from '@ant-design/icons';
+import { GlobalOutlined, DeleteOutlined } from '@ant-design/icons';
 import MediaQuery from 'react-responsive';
 
 import SideMenu from '../../components/Menu/index.js';
@@ -14,6 +14,7 @@ import UserContext from '../../contexts/userContext.js';
 import useCompanyOverview from '../../hooks/api/useCompanyOverview.js';
 import { useParams } from 'react-router';
 import CompanyContext from '../../contexts/companyContext.js';
+import useDeleteCompany from '../../hooks/api/useDeleteCompany.js';
 
 export default function CompanyOverView() {
 	const { companyId } = useParams();

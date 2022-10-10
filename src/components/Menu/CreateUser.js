@@ -33,8 +33,6 @@ export default function CreateUser({ setNewUsers }) {
 
 	async function onSubmit(data) {
 		const picture = data.picture[0];
-		console.log(data);
-		console.log({ ...data, picture: picture });
 		try {
 			await crateUserSubmit({ ...data, picture: picture });
 			const users = await getAllUsersAsync();

@@ -16,7 +16,6 @@ import CreateAssetBanner from '../../components/CreateAsset/createAssetBanner.js
 export default function CreateAssetView() {
 	const location = useLocation();
 	const AssetName = location.state.newAsset;
-	console.log(location);
 
 	const { unitData } = useContext(UnitContext);
 	const { userData } = useContext(UserContext);
