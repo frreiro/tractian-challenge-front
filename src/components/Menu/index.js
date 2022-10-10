@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { GlobalOutlined, RocketOutlined, PlusCircleFilled, UserOutlined } from '@ant-design/icons';
@@ -9,6 +9,7 @@ import UserContext from '../../contexts/userContext.js';
 import CreateUnit from './CreateUnit.js';
 import Tooltip from './Tooltip.js';
 import CreateAsset from './CreateAsset.js';
+import useCompanies from '../../hooks/api/useCompanies.js';
 
 export default function SideMenu({ entityTitle, entityArray }) {
 	const location = useLocation();
@@ -18,6 +19,7 @@ export default function SideMenu({ entityTitle, entityArray }) {
 	const { unitData } = useContext(UnitContext);
 	const { companyData } = useContext(CompanyContext);
 
+	const { companiesData, getCompanies, companiesIsLoading } = useCompanies();
 	const currentLocation = location.pathname.split('/', 2).at(1);
 
 	function setNextRoute() {
@@ -26,32 +28,68 @@ export default function SideMenu({ entityTitle, entityArray }) {
 		if (currentLocation === 'asset') return 'asset';
 	}
 
+	const [companies, setCompanies] = useState(companiesData);
+
+	useEffect(() => {
+		if (companiesData) {
+			setCompanies(companiesData);
+		}
+	}, [companiesData]);
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const companies = await getCompanies();
+				setCompanies(companies);
+				console.log(companies);
+			} catch (e) {
+
+			}
+		})();
+	}, []);
+
 	return (
 		<Menu>
 			<div className='header'>
 				{currentLocation === 'unit'
 					? (
-						<div onClick={() => navigate(`/company/${companyData._id}`)} >
-							<GlobalOutlined style={{ color: '#fff', fontSize: 45, marginRight: 10 }} />
+						<div className="unit" onClick={() => navigate(`/company/${companyData._id}`)} >
+							<GlobalOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
 							<h1>{companyData.name}</h1>
 						</div>
 
 					)
 					: currentLocation === 'asset'
 						? (
-							<div onClick={() => navigate(`/unit/${unitData._id}`)}>
-								<RocketOutlined style={{ color: '#fff', fontSize: 45, marginRight: 10 }} />
+							<div className="asset" onClick={() => navigate(`/unit/${unitData._id}`)}>
+								<RocketOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
 								<h1>{unitData.name}</h1>
 							</div>
 						)
-						: userData.is_admin
+						: userData.is_admin && !companiesIsLoading
 							? (
-								<div onClick={() => navigate('/')}>
-									<UserOutlined style={{ color: '#fff', fontSize: 35, marginRight: 10 }} />
-									<h1>Users</h1>
-								</div>
+								<AdminCompanies>
+									<div>
+										<GlobalOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
+										<h1>Companies</h1>
+									</div>
+									<select onChange={(e) => navigate(`/company/${e.target.value}`)} defaultValue={companyData._id}>
+										{companies.map(company => {
+											return <option key={company._id} value={company._id} >{company.name}</option>;
+										})}
+									</select>
+									<div className="users" onClick={() => navigate('/')}>
+										<UserOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
+										<h1>Users</h1>
+									</div>
+								</AdminCompanies>
 							)
-							: <></>}
+							:
+							<div className="users" onClick={() => navigate('/')}>
+								<UserOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
+								<h1>Users</h1>
+							</div>
+				}
 
 			</div>
 
@@ -69,6 +107,45 @@ export default function SideMenu({ entityTitle, entityArray }) {
 		</Menu >
 	);
 }
+
+const AdminCompanies = styled.div`
+	display: flex;
+	flex-direction: column;
+
+
+
+	div:not(:last-child){
+		margin-bottom: 5px;
+	}
+
+
+	select{
+		width: 80%;
+		border: none;
+		outline: none;
+		background-color: white;
+		padding: 5px;
+
+		border-radius: 5px;
+
+		color: #1E3A8A;
+		font-family: 'Poppins';
+		font-size: 14px;
+		
+		margin-bottom: 15px;
+	}
+
+	option:hover {
+		color: white;
+
+	}
+
+	option{
+		border-radius: 5px;
+		width: 100%;
+		padding: 5px;
+	}
+`;
 
 const Title = styled.li`
 	font-weight: 700;
@@ -98,12 +175,53 @@ const Menu = styled.aside`
 	border-right: 1px solid white;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	word-break: break-word;
 
 	h1{
 		color: white;
 	}
+
+	.users{
+		width: 100%;
+		border-radius: 5px;
+		padding: 5px;
+
+		:hover{
+		background-color: rgba(255, 255, 255,0.4)
+		}
+	}
+
+	.unit{
+		width: 100%;
+		padding: 5px;
+		border-radius: 5px;
+		
+		
+		
+		:hover{
+		background-color: rgba(255, 255, 255,0.4)
+		}
+
+		h1{
+			width: 60%;
+		}
+	}
+
+	.asset{
+		width: 100%;
+		display: flex;
+		padding: 5px;
+		border-radius: 5px;
+		justify-content: center;
+		align-items: center;
+
+		:hover{
+		background-color: rgba(255, 255, 255,0.4)
+		}
+
+	}
+
+
 
 	ul{
 		width: 100%;
@@ -116,7 +234,7 @@ const Menu = styled.aside`
 		overflow: scroll;
 
 		::-webkit-scrollbar{
-			visibility: hidden;
+			display: none;
 		}
 	}
 
@@ -130,17 +248,13 @@ const Menu = styled.aside`
 			justify-content: center;
 			align-items: center;
 
-			h1{
-				width: 60%;
-			}
 		}
 	}
+
 
 	div{
 		display: flex;
 		justify-content: center;
-		/*padding-left: 40px;
-		padding-top: 50px;*/
 
 	}
 `;

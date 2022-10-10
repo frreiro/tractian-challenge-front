@@ -40,7 +40,7 @@ export default function CompanyOverView() {
 
 			}
 		})();
-	}, []);
+	}, [companyId]);
 
 	return companyDataIsLoading ? 'Carregando...' :
 		(

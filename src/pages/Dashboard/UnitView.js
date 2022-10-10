@@ -81,7 +81,12 @@ export default function UnitView() {
 						</MediaQuery>
 					</div>
 				</InfomationArea>
-				<DeleteOutlined className='trashicon' onClick={() => callDeleteUnit(unit._id)} style={{ cursor: 'pointer', fontSize: 20, marginRight: 22, position: 'absolute', top: 35, right: 20 }} />
+				{userData.is_admin
+					?
+					<DeleteOutlined className='trashicon' onClick={() => callDeleteUnit(unit._id)} style={{ cursor: 'pointer', fontSize: 20, marginRight: 22, position: 'absolute', top: 35, right: 20 }} />
+					:
+					<></>
+				}
 			</Dashboard>
 		</Main>
 	);
