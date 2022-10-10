@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import UserContext from '../../contexts/userContext.js';
 import MediaQuery from 'react-responsive';
 
 import SideMenu from '../../components/Menu/index.js';
-import { ThunderboltOutlined, EditOutlined } from '@ant-design/icons';
+import { ThunderboltOutlined, DeleteOutlined } from '@ant-design/icons';
 import { InfomationArea, TitleContainer, Dashboard, Main } from '../CompanyOverview/index.js';
 import useAsset from '../../hooks/api/useAsset.js';
 import AssetInfoBanner from '../../components/AssetsOverview/AssetInfoBanner.js';
@@ -13,6 +13,7 @@ import AssetHealthLevelBanner from '../../components/AssetsOverview/AssetHalthLe
 import UnitContext from '../../contexts/unitContext.js';
 import useUpdateAsset from '../../hooks/api/useUpdateAsset.js';
 import EditableText from '../../components/editableText.js';
+import useDeleteAsset from '../../hooks/api/useDeleteAsset.js';
 
 export default function AssetView() {
 	const { assetId } = useParams();
@@ -20,8 +21,11 @@ export default function AssetView() {
 	const { userData } = useContext(UserContext);
 	const { unitData } = useContext(UnitContext);
 
+	const navigate = useNavigate();
+
 	const { asset: assetAsync, assetIsLoading, getAsset } = useAsset();
 	const { updatedAssetIsLoading, updateAsset } = useUpdateAsset();
+	const { deleteAsset } = useDeleteAsset();
 
 	const [asset, setAsset] = useState(assetAsync);
 
@@ -49,13 +53,22 @@ export default function AssetView() {
 
 		}
 	}
+
+	async function callDeleteAsset(assetId) {
+		try {
+			await deleteAsset(assetId, userData.token);
+			navigate(`/unit/${unitData._id}`);
+		} catch (e) {
+
+		}
+	}
+
 	return assetIsLoading ? 'Carregando...' : (
 		<Main>
 			<MediaQuery minWidth={1000}>
 				<SideMenu entityTitle={'Assets'} entityArray={unitData.assets} />
 			</MediaQuery>
 			<Dashboard>
-
 				<TitleContainer>
 					<div>
 						<ThunderboltOutlined style={{ color: '#fff', fontSize: 45, marginRight: 22 }} />
@@ -74,6 +87,7 @@ export default function AssetView() {
 						</MediaQuery>
 					</div>
 				</InfomationArea>
+				<DeleteOutlined className='trashicon' onClick={() => callDeleteAsset(asset._id)} style={{ cursor: 'pointer', fontSize: 20, marginRight: 22, position: 'absolute', top: 35, right: 20 }} />
 			</Dashboard>
 		</Main>
 	);

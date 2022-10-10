@@ -19,3 +19,13 @@ export async function sendNewUnit(body, token) {
 
 	return response.data;
 }
+
+export async function deleteUnitData(unitId, token) {
+	const response = await api.delete(`/unit/${unitId}`, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	return response.data;
+}

@@ -30,3 +30,13 @@ export async function updateAsset(assetId, body, token) {
 
 	return response.data;
 }
+
+export async function deleteAsset(assetId, token) {
+	const response = await api.delete(`/assets/${assetId}`, {
+		headers: {
+			'Authorization': `Bearer ${token}`,
+		},
+	});
+
+	return response.data;
+}

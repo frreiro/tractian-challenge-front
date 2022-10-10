@@ -123,4 +123,14 @@ export const Dashboard = styled.main`
 export const Main = styled.div`
 	display: flex;
 
+	.trashicon{
+		color:white;
+		opacity: 0.5;
+
+	}
+
+	.trashicon:hover {
+		color: red;
+		opacity: 1;
+	}
 `;
