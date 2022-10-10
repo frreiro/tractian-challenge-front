@@ -90,7 +90,7 @@ const AssetForm = styled.form`
 		border:none;
 		border-radius: 5px;
 		padding-left: 5px;
-		color: #3525EB;
+		color: var(--banners-color);
 	}
 
 	div > input:not(:last-child), div >select {
@@ -109,7 +109,7 @@ const AssetForm = styled.form`
 		border: none;
 		border-radius: 5px;
 
-		color: #3525EB;
+		color: var(--banners-color);
 	}
 
 `;
@@ -145,6 +145,6 @@ const UploadLabel = styled.label`
 	flex-direction: column;
 	justify-content: center;
 
-	color:#3525EB;
+	color:var(--banners-color);
 
 `;

@@ -24,7 +24,7 @@ export const Container = styled.div`
 	label{
 		font-weight: 500;
 		font-size: 20px;
-		color: #3525EB;
+		color: var(--banners-color);
 		margin-top: 10px;
 
 	}
@@ -34,8 +34,8 @@ export const Container = styled.div`
 		outline: none;
 		border: none;
 		margin: 10px;
-		border:  1px solid #3525EB;
-		color: #3525EB;
+		border:  1px solid var(--banners-color);
+		color: var(--banners-color);
 		padding: 5px;
 	}
 

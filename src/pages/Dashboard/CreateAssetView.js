@@ -7,7 +7,7 @@ import MediaQuery from 'react-responsive';
 
 import SideMenu from '../../components/Menu/index.js';
 import useUnit from '../../hooks/api/useUnits.js';
-import { ThunderboltOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, ThunderboltOutlined } from '@ant-design/icons';
 
 import UnitContext from '../../contexts/unitContext.js';
 import { InfomationArea, TitleContainer, Dashboard, Main } from '../CompanyOverview/index.js';
@@ -20,10 +20,21 @@ export default function CreateAssetView() {
 	const { unitData } = useContext(UnitContext);
 	const { userData } = useContext(UserContext);
 
+	const [showMenu, setShowMenu] = useState(false);
+
 	return (
 		<Main>
 			<MediaQuery minWidth={1000}>
 				<SideMenu entityTitle={'Assets'} entityArray={unitData.assets} />
+			</MediaQuery>
+			<MediaQuery maxWidth={1000}>
+				{showMenu
+					?
+					<SideMenu entityTitle={'Assets'} entityArray={unitData.assets} closeMenu={setShowMenu} />
+
+					:
+					<MenuFoldOutlined className="menu_icon" onClick={() => setShowMenu(true)} />
+				}
 			</MediaQuery>
 			<Dashboard>
 

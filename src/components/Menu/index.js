@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
-import { GlobalOutlined, RocketOutlined, PlusCircleFilled, UserOutlined, DownOutlined, UpOutlined, DeleteOutlined } from '@ant-design/icons';
+import MediaQuery from 'react-responsive';
+import { GlobalOutlined, RocketOutlined, PlusCircleFilled, UserOutlined, DownOutlined, UpOutlined, CloseOutlined } from '@ant-design/icons';
 
 import UnitContext from '../../contexts/unitContext.js';
 import CompanyContext from '../../contexts/companyContext.js';
@@ -14,7 +15,7 @@ import CompanyList from './CompanyList.js';
 import useDeleteCompany from '../../hooks/api/useDeleteCompany.js';
 import useCreateCompany from '../../hooks/api/useCreateCompany.js';
 
-export default function SideMenu({ entityTitle, entityArray, createUnit }) {
+export default function SideMenu({ entityTitle, entityArray, createUnit, closeMenu }) {
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -74,6 +75,9 @@ export default function SideMenu({ entityTitle, entityArray, createUnit }) {
 
 	if (currentLocation === 'company') return (
 		<Menu>
+			<MediaQuery maxWidth={1000}>
+				<CloseOutlined onClick={() => closeMenu(false)} style={{ color: '#fff', fontSize: 20, position: 'absolute', top: '5px', right: '5px', cursor: 'pointer' }} />
+			</MediaQuery>
 			<div className='header'>
 				{userData.is_admin && !companiesIsLoading
 					? (
@@ -126,6 +130,9 @@ export default function SideMenu({ entityTitle, entityArray, createUnit }) {
 
 	else if (currentLocation === 'unit') return (
 		<Menu>
+			<MediaQuery maxWidth={1000}>
+				<CloseOutlined onClick={() => closeMenu(false)} style={{ color: '#fff', fontSize: 20, position: 'absolute', top: '5px', right: '5px', cursor: 'pointer' }} />
+			</MediaQuery>
 			<div className='header'>
 				<div className="unit" onClick={() => navigate(`/company/${companyData._id}`)} >
 					<GlobalOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
@@ -148,6 +155,9 @@ export default function SideMenu({ entityTitle, entityArray, createUnit }) {
 
 	else return (
 		<Menu>
+			<MediaQuery maxWidth={1000}>
+				<CloseOutlined onClick={() => closeMenu(false)} style={{ color: '#fff', fontSize: 20, position: 'absolute', top: '5px', right: '5px', cursor: 'pointer' }} />
+			</MediaQuery>
 			<div className='header'>
 				<div className="asset" onClick={() => navigate(`/unit/${unitData._id}`)}>
 					<RocketOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
@@ -241,6 +251,18 @@ const Menu = styled.aside`
 	flex-direction: column;
 	word-break: break-word;
 
+	@media (max-width: 1000px) {
+		width: 200px;
+
+		padding-bottom: 12px;
+		position:absolute;
+		background-color: var(--banners-color);
+		z-index: 2;
+
+
+
+    }
+
 	h1{
 		color: white;
 	}
@@ -284,10 +306,6 @@ const Menu = styled.aside`
 		}
 
 	}
-
-
-
-
 
 	.header{
 		padding-top: 20px;

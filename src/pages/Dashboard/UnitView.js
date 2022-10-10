@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserContext from '../../contexts/userContext.js';
 import MediaQuery from 'react-responsive';
-import { GlobalOutlined, DeleteOutlined } from '@ant-design/icons';
+import { GlobalOutlined, DeleteOutlined, MenuFoldOutlined } from '@ant-design/icons';
 
 import SideMenu from '../../components/Menu/index.js';
 
@@ -31,6 +31,7 @@ export default function UnitView() {
 	const navigate = useNavigate();
 
 	const [unit, setUnit] = useState(unitAsync);
+	const [showMenu, setShowMenu] = useState(false);
 
 	useEffect(() => {
 		if (unitAsync) {
@@ -72,6 +73,15 @@ export default function UnitView() {
 		<Main>
 			<MediaQuery minWidth={1000}>
 				<SideMenu entityTitle={'Assets'} entityArray={unit.assets} />
+			</MediaQuery>
+			<MediaQuery maxWidth={1000}>
+				{showMenu
+					?
+					<SideMenu entityTitle={'Assets'} entityArray={unit.assets} closeMenu={setShowMenu} />
+
+					:
+					<MenuFoldOutlined className="menu_icon" onClick={() => setShowMenu(true)} />
+				}
 			</MediaQuery>
 			<Dashboard>
 				<TitleContainer>

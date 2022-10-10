@@ -1,7 +1,7 @@
 
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { GlobalOutlined, DeleteOutlined } from '@ant-design/icons';
+import { GlobalOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import MediaQuery from 'react-responsive';
 
 import SideMenu from '../../components/Menu/index.js';
@@ -29,6 +29,8 @@ export default function CompanyOverView() {
 	const [companyData, setCompanyData] = useState(companyDataAsync);
 	const { setNewUnit, unitIsLoading } = useNewUnit();
 	const { updateCompany, updatedCompanyIsLoading } = useUpdateCompany();
+
+	const [showMenu, setShowMenu] = useState(false);
 	useEffect(() => {
 		if (companyDataAsync) {
 			setCompanyData(companyDataAsync);
@@ -69,6 +71,14 @@ export default function CompanyOverView() {
 			<Main>
 				<MediaQuery minWidth={1000}>
 					<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} createUnit={callCreateUnit} />
+				</MediaQuery>
+				<MediaQuery maxWidth={1000}>
+					{showMenu
+						?
+						<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} createUnit={callCreateUnit} closeMenu={setShowMenu} />
+						:
+						<MenuFoldOutlined className="menu_icon" onClick={() => setShowMenu(true)} />
+					}
 				</MediaQuery>
 				<Dashboard>
 					<TitleContainer>
@@ -156,5 +166,14 @@ export const Main = styled.div`
 	.trashicon:hover {
 		color: red;
 		opacity: 1;
+	}
+
+	.menu_icon{
+		position:absolute;
+		top: 30px;
+		left: 20px;
+		font-size: 35px;
+		color: white;
+
 	}
 `;

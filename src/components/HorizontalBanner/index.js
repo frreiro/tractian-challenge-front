@@ -11,7 +11,7 @@ export default function HorizontalBanner({ children }) {
 const HorizontalBannerContainer = styled.article`
 	width: 420px;
 	max-height: 190px;
-	background-color: #3525EB;
+	background-color: var(--banners-color);
 	border-radius: 10px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 

@@ -4,7 +4,7 @@ import UserContext from '../../contexts/userContext.js';
 import MediaQuery from 'react-responsive';
 
 import SideMenu from '../../components/Menu/index.js';
-import { ThunderboltOutlined, DeleteOutlined } from '@ant-design/icons';
+import { ThunderboltOutlined, DeleteOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { InfomationArea, TitleContainer, Dashboard, Main } from '../CompanyOverview/index.js';
 import useAsset from '../../hooks/api/useAsset.js';
 import AssetInfoBanner from '../../components/AssetsOverview/AssetInfoBanner.js';
@@ -28,6 +28,7 @@ export default function AssetView() {
 	const { deleteAsset } = useDeleteAsset();
 
 	const [asset, setAsset] = useState(assetAsync);
+	const [showMenu, setShowMenu] = useState(false);
 
 	useEffect(() => {
 		if (assetAsync) {
@@ -67,6 +68,15 @@ export default function AssetView() {
 		<Main>
 			<MediaQuery minWidth={1000}>
 				<SideMenu entityTitle={'Assets'} entityArray={unitData.assets} />
+			</MediaQuery>
+			<MediaQuery maxWidth={1000}>
+				{showMenu
+					?
+					<SideMenu entityTitle={'Assets'} entityArray={unitData.assets} closeMenu={setShowMenu} />
+
+					:
+					<MenuFoldOutlined className="menu_icon" onClick={() => setShowMenu(true)} />
+				}
 			</MediaQuery>
 			<Dashboard>
 				<TitleContainer>
