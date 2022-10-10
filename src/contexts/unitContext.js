@@ -8,24 +8,20 @@ export default UnitContext;
 
 export function UnitProvider({ children }) {
 	const [unitData, setUnitData] = useState(JSON.parse(localStorage.getItem('unit')));
-	const [unitId, setUnitId] = useState(null);
 
 	const { unit: unitAsync, unitError, unitIsLoading, getUnitInfo } = useUnit();
 	const { userData } = useContext(UserContext);
 
-	useEffect(() => {
-		(async () => {
-			try {
-				const unitData = await getUnitInfo(unitId, userData.token);
-				localStorage.setItem('unit', JSON.stringify(unitData));
-				setUnitData(unitData);
-			} catch (e) {
+	async function getUnit(unitId) {
+		try {
+			const unitData = await getUnitInfo(unitId, userData.token);
+			localStorage.setItem('unit', JSON.stringify(unitData));
+			setUnitData(unitData);
+		} catch (e) {
 
-			}
-		})();
-	}, [unitId]);
-
-	return <UnitContext.Provider value={{ unitData, setUnitData, setUnitId }} >
+		}
+	}
+	return <UnitContext.Provider value={{ unitData, setUnitData, getUnit }} >
 		{children}
 	</UnitContext.Provider>;
 }

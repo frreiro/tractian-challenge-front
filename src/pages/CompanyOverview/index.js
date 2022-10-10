@@ -15,6 +15,7 @@ import useCompanyOverview from '../../hooks/api/useCompanyOverview.js';
 import { useParams } from 'react-router';
 import CompanyContext from '../../contexts/companyContext.js';
 import useDeleteCompany from '../../hooks/api/useDeleteCompany.js';
+import useNewUnit from '../../hooks/api/useNewUnit.js';
 
 export default function CompanyOverView() {
 	const { companyId } = useParams();
@@ -23,7 +24,7 @@ export default function CompanyOverView() {
 
 	const { companyData: companyDataAsync, companyDataIsLoading, getCompanyOverall } = useCompanyOverview();
 	const [companyData, setCompanyData] = useState(companyDataAsync);
-
+	const { setNewUnit, unitIsLoading } = useNewUnit();
 	useEffect(() => {
 		if (companyDataAsync) {
 			setCompanyData(companyDataAsync);
@@ -41,13 +42,21 @@ export default function CompanyOverView() {
 
 			}
 		})();
-	}, [companyId]);
+	}, [companyId, unitIsLoading]);
+
+	async function callCreateUnit(text) {
+		try {
+			await setNewUnit({ company_id: companyData._id, name: text }, userData.token);
+		} catch (e) {
+
+		}
+	}
 
 	return companyDataIsLoading ? 'Carregando...' :
 		(
 			<Main>
 				<MediaQuery minWidth={1000}>
-					<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} />
+					<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} createUnit={callCreateUnit} />
 				</MediaQuery>
 				<Dashboard>
 					<TitleContainer>

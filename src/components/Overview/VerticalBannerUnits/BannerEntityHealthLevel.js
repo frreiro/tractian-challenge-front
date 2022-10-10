@@ -6,10 +6,10 @@ import UnitContext from '../../../contexts/unitContext.js';
 
 export default function BannerEnitityHealthLevel({ name, image, unit, healthLevel, id, unitId }) {
 	const navigate = useNavigate();
-	const { setUnitId } = useContext(UnitContext);
+	const { getUnit } = useContext(UnitContext);
 
-	function redirectToAsset() {
-		setUnitId(unitId);
+	async function redirectToAsset() {
+		await getUnit(unitId);
 		navigate('/asset/' + id);
 	}
 

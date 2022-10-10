@@ -14,7 +14,7 @@ import CompanyList from './CompanyList.js';
 import useDeleteCompany from '../../hooks/api/useDeleteCompany.js';
 import useCreateCompany from '../../hooks/api/useCreateCompany.js';
 
-export default function SideMenu({ entityTitle, entityArray }) {
+export default function SideMenu({ entityTitle, entityArray, createUnit }) {
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -72,61 +72,66 @@ export default function SideMenu({ entityTitle, entityArray }) {
 		})();
 	}, [deleteCompanyIsLoading, createCompanyIsLoading]);
 
-	return (
+	if (currentLocation === 'company') return (
 		<Menu>
 			<div className='header'>
-				{currentLocation === 'unit'
+				{userData.is_admin && !companiesIsLoading
 					? (
-						<div className="unit" onClick={() => navigate(`/company/${companyData._id}`)} >
-							<GlobalOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
-							<h1>{companyData.name}</h1>
-						</div>
-
-					)
-					: currentLocation === 'asset'
-						? (
-							<div className="asset" onClick={() => navigate(`/unit/${unitData._id}`)}>
-								<RocketOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
-								<h1>{unitData.name}</h1>
-							</div>
-						)
-						: userData.is_admin && !companiesIsLoading
-							? (
-								<AdminCompanies showCompanies={showCompanies}>
-									<div className="users" onClick={() => navigate('/')}>
-										<UserOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
-										<h1>Users</h1>
-									</div>
-									<div onClick={() => setShowCompanies(!showCompanies)}>
-										<GlobalOutlined style={{ color: '#fff', fontSize: 15, marginRight: 10 }} />
-										<h1>Companies</h1>
-										{showCompanies
-											?
-											<UpOutlined style={{ color: '#fff', fontSize: 15, marginLeft: 10 }} />
-											:
-											<DownOutlined style={{ color: '#fff', fontSize: 15, marginLeft: 10 }} />
-
-										}
-									</div>
-									{showCompanies ?
-										(
-											<CompanyList companies={companies} deleteCompany={callDeleteCompany} createCompany={callCreateCompany} />
-
-										)
-										: <></>
-									}
-
-								</AdminCompanies>
-							)
-							:
+						<AdminCompanies showCompanies={showCompanies}>
 							<div className="users" onClick={() => navigate('/')}>
 								<UserOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
 								<h1>Users</h1>
 							</div>
+							<div onClick={() => setShowCompanies(!showCompanies)}>
+								<GlobalOutlined style={{ color: '#fff', fontSize: 15, marginRight: 10 }} />
+								<h1>Companies</h1>
+								{showCompanies
+									?
+									<UpOutlined style={{ color: '#fff', fontSize: 15, marginLeft: 10 }} />
+									:
+									<DownOutlined style={{ color: '#fff', fontSize: 15, marginLeft: 10 }} />
+
+								}
+							</div>
+							{showCompanies ?
+								(
+									<CompanyList companies={companies} deleteCompany={callDeleteCompany} createCompany={callCreateCompany} />
+
+								)
+								: <></>
+							}
+
+						</AdminCompanies>
+					)
+					:
+					<div className="users" onClick={() => navigate('/')}>
+						<UserOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
+						<h1>Users</h1>
+					</div>
 				}
-
 			</div>
+			<MenuUl>
+				<Title>{entityTitle}</Title>
+				{companyData.units?.map(entity => {
+					return (
+						<TitleEntity key={entity._id} onClick={() => navigate(`/${setNextRoute()}/${entity._id}`)}>{entity.name}</TitleEntity>
+					);
+				})}
+			</MenuUl>
+			<Tooltip content={currentLocation === 'company' ? <CreateUnit callCreateUnit={createUnit} /> : <CreateAsset />}>
+				{userData.is_admin ? <PlusCircleFilled style={{ color: '#fff', fontSize: 35, marginTop: 10, cursor: 'pointer' }} /> : <></>}
+			</Tooltip>
+		</Menu>
+	);
 
+	else if (currentLocation === 'unit') return (
+		<Menu>
+			<div className='header'>
+				<div className="unit" onClick={() => navigate(`/company/${companyData._id}`)} >
+					<GlobalOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
+					<h1>{companyData.name}</h1>
+				</div>
+			</div>
 			<MenuUl>
 				<Title>{entityTitle}</Title>
 				{entityArray?.map(entity => {
@@ -135,10 +140,32 @@ export default function SideMenu({ entityTitle, entityArray }) {
 					);
 				})}
 			</MenuUl>
-			<Tooltip content={currentLocation === 'company' ? <CreateUnit /> : <CreateAsset />}>
+			<Tooltip content={currentLocation === 'company' ? <CreateUnit callCreateUnit={createUnit} /> : <CreateAsset />}>
 				{userData.is_admin ? <PlusCircleFilled style={{ color: '#fff', fontSize: 35, marginTop: 10, cursor: 'pointer' }} /> : <></>}
 			</Tooltip>
-		</Menu >
+		</Menu>
+	);
+
+	else if (currentLocation === 'asset') return (
+		<Menu>
+			<div className='header'>
+				<div className="asset" onClick={() => navigate(`/unit/${unitData._id}`)}>
+					<RocketOutlined style={{ color: '#fff', fontSize: 25, marginRight: 10 }} />
+					<h1>{unitData.name}</h1>
+				</div>
+			</div>
+			<MenuUl>
+				<Title>{entityTitle}</Title>
+				{entityArray?.map(entity => {
+					return (
+						<TitleEntity key={entity._id} onClick={() => navigate(`/${setNextRoute()}/${entity._id}`)}>{entity.name}</TitleEntity>
+					);
+				})}
+			</MenuUl>
+			<Tooltip content={currentLocation === 'company' ? <CreateUnit callCreateUnit={createUnit} /> : <CreateAsset />}>
+				{userData.is_admin ? <PlusCircleFilled style={{ color: '#fff', fontSize: 35, marginTop: 10, cursor: 'pointer' }} /> : <></>}
+			</Tooltip>
+		</Menu>
 	);
 }
 
