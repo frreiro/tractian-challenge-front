@@ -14,6 +14,7 @@ import UnitContext from '../../contexts/unitContext.js';
 import useUpdateAsset from '../../hooks/api/useUpdateAsset.js';
 import EditableText from '../../components/editableText.js';
 import useDeleteAsset from '../../hooks/api/useDeleteAsset.js';
+import { toast } from 'react-toastify';
 
 export default function AssetView() {
 	const { assetId } = useParams();
@@ -42,7 +43,7 @@ export default function AssetView() {
 				const assetData = await getAsset(assetId, userData.token);
 				setAsset(assetData);
 			} catch (e) {
-
+				toast.error('Could not get asset');
 			}
 		})();
 	}, [assetId, updatedAssetIsLoading]);
@@ -51,7 +52,7 @@ export default function AssetView() {
 		try {
 			await updateAsset(assetId, property, userData.token);
 		} catch (e) {
-
+			toast.error('Could not update asset');
 		}
 	}
 
@@ -60,7 +61,7 @@ export default function AssetView() {
 			await deleteAsset(assetId, userData.token);
 			navigate(`/unit/${unitData._id}`);
 		} catch (e) {
-
+			toast.error('Could not delete asset');
 		}
 	}
 

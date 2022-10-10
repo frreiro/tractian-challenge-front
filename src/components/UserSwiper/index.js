@@ -12,10 +12,11 @@ import useUsers from '../../hooks/api/useUsers.js';
 import Tooltip from '../Menu/Tooltip.js';
 import CreateAsset from '../Menu/CreateAsset.js';
 import CreateUser from '../Menu/CreateUser.js';
+import { toast } from 'react-toastify';
 
 //TODO: tratar os loading e erros
 export default function UserSwiper({ selectUser }) {
-	const { users: oldUsers, usersIsLoading, usersError } = useUsers();
+	const { users: oldUsers, usersIsLoading, usersError, getAllUsersAsync } = useUsers();
 	const [users, setNewUsers] = useState(oldUsers);
 
 	useEffect(() => {
@@ -23,6 +24,17 @@ export default function UserSwiper({ selectUser }) {
 			setNewUsers(oldUsers);
 		}
 	}, [oldUsers]);
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const users = await getAllUsersAsync();
+				setNewUsers(users);
+			} catch (e) {
+				toast.error('Could not get users');
+			}
+		})();
+	}, []);
 
 	return (
 		<SwiperWrapper>

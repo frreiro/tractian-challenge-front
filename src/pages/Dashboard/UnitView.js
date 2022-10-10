@@ -16,6 +16,7 @@ import useDeleteUnit from '../../hooks/api/useDeleteUnit.js';
 import CompanyContext from '../../contexts/companyContext.js';
 import useUpdateUnit from '../../hooks/api/useUpdateUnit.js';
 import EditableText from '../../components/editableText.js';
+import { toast } from 'react-toastify';
 
 export default function UnitView() {
 	const { unitId } = useParams();
@@ -47,7 +48,7 @@ export default function UnitView() {
 				setUnit(unitData);
 				setUnitData(unitData);
 			} catch (e) {
-
+				toast.error('Could not get unit');
 			}
 		})();
 	}, [updatedUnitIsLoading]);
@@ -57,7 +58,7 @@ export default function UnitView() {
 			await deleteUnit(assetId, userData.token);
 			navigate(`/company/${companyData._id}`);
 		} catch (e) {
-
+			toast.error('Could not delete unit');
 		}
 	}
 
@@ -65,7 +66,7 @@ export default function UnitView() {
 		try {
 			await updateUnit(unit._id, property, userData.token);
 		} catch (e) {
-
+			toast.error('Could not update unit');
 		}
 	}
 

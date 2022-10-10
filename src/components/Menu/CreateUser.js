@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import useCompanies from '../../hooks/api/useCompanies.js';
 import useCreateUsers from '../../hooks/api/useCreateUser.js';
 import useUsers from '../../hooks/api/useUsers.js';
@@ -26,7 +27,7 @@ export default function CreateUser({ setNewUsers }) {
 				const companies = await getCompanies();
 				setCompanies(companies);
 			} catch (e) {
-
+				toast.error('Could not get companies');
 			}
 		})();
 	}, []);
@@ -38,7 +39,7 @@ export default function CreateUser({ setNewUsers }) {
 			const users = await getAllUsersAsync();
 			setNewUsers(users);
 		} catch (e) {
-
+			toast.error('Could not get users');
 		}
 	}
 

@@ -5,6 +5,7 @@ import UserSwiper from '../../components/UserSwiper/index.js';
 import useLogin from '../../hooks/api/useLogIn.js';
 import UserContext from '../../contexts/userContext.js';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 export default function SignIn() {
 	const { getUserToken } = useLogin();
@@ -18,7 +19,8 @@ export default function SignIn() {
 			localStorage.setItem('userData', JSON.stringify({ ...user, token: userToken }));
 			navigate(`/company/${user.company_id}`);
 		} catch (e) {
-
+			console.log(e);
+			toast.error('Could not get user data');
 		}
 	}
 

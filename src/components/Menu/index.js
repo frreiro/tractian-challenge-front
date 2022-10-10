@@ -14,6 +14,7 @@ import useCompanies from '../../hooks/api/useCompanies.js';
 import CompanyList from './CompanyList.js';
 import useDeleteCompany from '../../hooks/api/useDeleteCompany.js';
 import useCreateCompany from '../../hooks/api/useCreateCompany.js';
+import { toast } from 'react-toastify';
 
 export default function SideMenu({ entityTitle, entityArray, createUnit, closeMenu }) {
 	const location = useLocation();
@@ -43,7 +44,7 @@ export default function SideMenu({ entityTitle, entityArray, createUnit, closeMe
 		try {
 			await deleteCompany(companyId, userData.token);
 		} catch (e) {
-
+			toast.error('Could not delete company');
 		}
 	}
 
@@ -52,7 +53,7 @@ export default function SideMenu({ entityTitle, entityArray, createUnit, closeMe
 		try {
 			await createCompany({ name: text }, userData.token);
 		} catch (e) {
-
+			toast.error('Could not create company');
 		}
 	}
 
@@ -68,7 +69,7 @@ export default function SideMenu({ entityTitle, entityArray, createUnit, closeMe
 				const companies = await getCompanies();
 				setCompanies(companies);
 			} catch (e) {
-
+				toast.error('Could not get companies');
 			}
 		})();
 	}, [deleteCompanyIsLoading, createCompanyIsLoading]);

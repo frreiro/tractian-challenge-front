@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import useUnit from '../hooks/api/useUnits.js';
 import UserContext from './userContext.js';
 
@@ -18,7 +19,7 @@ export function UnitProvider({ children }) {
 			localStorage.setItem('unit', JSON.stringify(unitData));
 			setUnitData(unitData);
 		} catch (e) {
-
+			toast.error('Could not get unit');
 		}
 	}
 	return <UnitContext.Provider value={{ unitData, setUnitData, getUnit }} >

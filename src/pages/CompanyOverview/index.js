@@ -19,6 +19,7 @@ import useNewUnit from '../../hooks/api/useNewUnit.js';
 import EditableText from '../../components/editableText.js';
 import useUpdateUnit from '../../hooks/api/useUpdateUnit.js';
 import useUpdateCompany from '../../hooks/api/useUpdateCompany.js';
+import { toast } from 'react-toastify';
 
 export default function CompanyOverView() {
 	const { companyId } = useParams();
@@ -45,7 +46,7 @@ export default function CompanyOverView() {
 				setCompanyData(companyData);
 				setCompanyContext(companyData);
 			} catch (e) {
-
+				toast.error('Could not get company data');
 			}
 		})();
 	}, [companyId, unitIsLoading, updatedCompanyIsLoading]);
@@ -54,7 +55,7 @@ export default function CompanyOverView() {
 		try {
 			await setNewUnit({ company_id: companyData._id, name: text }, userData.token);
 		} catch (e) {
-
+			toast.error('Could not create unit');
 		}
 	}
 
@@ -62,7 +63,7 @@ export default function CompanyOverView() {
 		try {
 			await updateCompany(companyData._id, property, userData.token);
 		} catch (e) {
-
+			toast.error('Could not update company');
 		}
 	}
 

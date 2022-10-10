@@ -6,6 +6,7 @@ import UnitContext from '../../contexts/unitContext.js';
 import useNewAsset from '../../hooks/api/useNewAsset.js';
 import UserContext from '../../contexts/userContext.js';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 export default function CreateAssetBanner({ assetName }) {
 	const { register, formState: { errors }, handleSubmit, watch } = useForm({
@@ -33,6 +34,7 @@ export default function CreateAssetBanner({ assetName }) {
 			await createNewAsset(newAsset, userData.token);
 			navigate(-1);
 		} catch (e) {
+			toast.error('Could not create asset');
 			console.log(e);
 		}
 	}

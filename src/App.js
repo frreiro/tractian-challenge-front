@@ -12,12 +12,14 @@ import CompanyOverView from './pages/CompanyOverview/index.js';
 import UnitView from './pages/Dashboard/UnitView.js';
 import AssetView from './pages/Dashboard/AssetView.js';
 import { CompanyProvider } from './contexts/companyContext.js';
-import CreateAsset from './components/Menu/CreateAsset.js';
 import CreateAssetView from './pages/Dashboard/CreateAssetView.js';
+import { ToastContainer } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 export default function App() {
 	return (
 		<BrowserRouter>
+			<ToastContainer />
 			<UserProvider>
 				<CompanyProvider>
 					<UnitProvider>
@@ -31,6 +33,7 @@ export default function App() {
 					</UnitProvider>
 				</CompanyProvider>
 			</UserProvider>
+
 		</BrowserRouter>
 	);
 }
