@@ -16,6 +16,9 @@ import { useParams } from 'react-router';
 import CompanyContext from '../../contexts/companyContext.js';
 import useDeleteCompany from '../../hooks/api/useDeleteCompany.js';
 import useNewUnit from '../../hooks/api/useNewUnit.js';
+import EditableText from '../../components/editableText.js';
+import useUpdateUnit from '../../hooks/api/useUpdateUnit.js';
+import useUpdateCompany from '../../hooks/api/useUpdateCompany.js';
 
 export default function CompanyOverView() {
 	const { companyId } = useParams();
@@ -25,6 +28,7 @@ export default function CompanyOverView() {
 	const { companyData: companyDataAsync, companyDataIsLoading, getCompanyOverall } = useCompanyOverview();
 	const [companyData, setCompanyData] = useState(companyDataAsync);
 	const { setNewUnit, unitIsLoading } = useNewUnit();
+	const { updateCompany, updatedCompanyIsLoading } = useUpdateCompany();
 	useEffect(() => {
 		if (companyDataAsync) {
 			setCompanyData(companyDataAsync);
@@ -42,11 +46,19 @@ export default function CompanyOverView() {
 
 			}
 		})();
-	}, [companyId, unitIsLoading]);
+	}, [companyId, unitIsLoading, updatedCompanyIsLoading]);
 
 	async function callCreateUnit(text) {
 		try {
 			await setNewUnit({ company_id: companyData._id, name: text }, userData.token);
+		} catch (e) {
+
+		}
+	}
+
+	async function callUpdateUnit(property) {
+		try {
+			await updateCompany(companyData._id, property, userData.token);
 		} catch (e) {
 
 		}
@@ -62,9 +74,11 @@ export default function CompanyOverView() {
 					<TitleContainer>
 						<div>
 							<GlobalOutlined style={{ color: '#fff', fontSize: 35, marginRight: 22 }} />
-							<h1>OVERVIEW</h1>
+							<EditableText submitFuncion={(text) => callUpdateUnit({ name: text })}>
+								<h1>{companyData.name}</h1>
+							</EditableText>
 						</div>
-						<p>{companyData.name}</p>
+						<p>OVERVIEW</p>
 					</TitleContainer>
 					<InfomationArea>
 						<MediaQuery minWidth={760}>

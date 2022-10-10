@@ -14,6 +14,8 @@ import VerticalBannerAssets from '../../components/UnitOverview/VerticalBannerAs
 import UnitContext from '../../contexts/unitContext.js';
 import useDeleteUnit from '../../hooks/api/useDeleteUnit.js';
 import CompanyContext from '../../contexts/companyContext.js';
+import useUpdateUnit from '../../hooks/api/useUpdateUnit.js';
+import EditableText from '../../components/editableText.js';
 
 export default function UnitView() {
 	const { unitId } = useParams();
@@ -22,6 +24,8 @@ export default function UnitView() {
 	const { companyData } = useContext(CompanyContext);
 	const { userData } = useContext(UserContext);
 	const { unit: unitAsync, unitError, unitIsLoading, getUnitInfo } = useUnit();
+	const { updateUnit, updatedUnitIsLoading } = useUpdateUnit();
+
 	const { deleteUnit } = useDeleteUnit();
 
 	const navigate = useNavigate();
@@ -45,12 +49,20 @@ export default function UnitView() {
 
 			}
 		})();
-	}, []);
+	}, [updatedUnitIsLoading]);
 
 	async function callDeleteUnit(assetId) {
 		try {
 			await deleteUnit(assetId, userData.token);
 			navigate(`/company/${companyData._id}`);
+		} catch (e) {
+
+		}
+	}
+
+	async function callUpdateUnit(property) {
+		try {
+			await updateUnit(unit._id, property, userData.token);
 		} catch (e) {
 
 		}
@@ -65,7 +77,9 @@ export default function UnitView() {
 				<TitleContainer>
 					<div>
 						<GlobalOutlined style={{ color: '#fff', fontSize: 35, marginRight: 22 }} />
-						<h1>{unit.name.toUpperCase()}</h1>
+						<EditableText submitFuncion={(text) => callUpdateUnit({ name: text })}>
+							<h1>{unit.name.toUpperCase()}</h1>
+						</EditableText>
 					</div>
 					<p>{unit.company}</p>
 				</TitleContainer>

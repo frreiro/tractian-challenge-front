@@ -36,3 +36,12 @@ export async function createCompany(body, token) {
 	return response.data;
 }
 
+export async function updateCompanyData(unitId, body, token) {
+	const response = await api.put(`/company/${unitId}`, body, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	return response.data;
+}

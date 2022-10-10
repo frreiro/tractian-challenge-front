@@ -29,3 +29,13 @@ export async function deleteUnitData(unitId, token) {
 
 	return response.data;
 }
+
+export async function updateUnitData(unitId, body, token) {
+	const response = await api.put(`/unit/${unitId}`, body, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	return response.data;
+}

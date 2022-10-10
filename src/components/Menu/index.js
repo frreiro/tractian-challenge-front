@@ -146,7 +146,7 @@ export default function SideMenu({ entityTitle, entityArray, createUnit }) {
 		</Menu>
 	);
 
-	else if (currentLocation === 'asset') return (
+	else return (
 		<Menu>
 			<div className='header'>
 				<div className="asset" onClick={() => navigate(`/unit/${unitData._id}`)}>
