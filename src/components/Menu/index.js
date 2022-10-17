@@ -19,7 +19,6 @@ import { toast } from 'react-toastify';
 export default function SideMenu({ entityTitle, entityArray, createUnit, closeMenu }) {
 	const location = useLocation();
 	const navigate = useNavigate();
-
 	const [showCompanies, setShowCompanies] = useState(false);
 
 	const { userData } = useContext(UserContext);
@@ -117,7 +116,7 @@ export default function SideMenu({ entityTitle, entityArray, createUnit, closeMe
 			</div>
 			<MenuUl>
 				<Title>{entityTitle}</Title>
-				{companyData.units?.map(entity => {
+				{entityArray?.map(entity => {
 					return (
 						<TitleEntity key={entity._id} onClick={() => navigate(`/${setNextRoute()}/${entity._id}`)}>{entity.name}</TitleEntity>
 					);

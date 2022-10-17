@@ -71,12 +71,12 @@ export default function CompanyOverView() {
 		(
 			<Main>
 				<MediaQuery minWidth={1000}>
-					<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} createUnit={callCreateUnit} />
+					<SideMenu entityTitle={'UNITS'} entityArray={companyData?.units} createUnit={callCreateUnit} />
 				</MediaQuery>
 				<MediaQuery maxWidth={1000}>
 					{showMenu
 						?
-						<SideMenu entityTitle={'UNITS'} entityArray={companyData.units} createUnit={callCreateUnit} closeMenu={setShowMenu} />
+						<SideMenu entityTitle={'UNITS'} entityArray={companyData?.units} createUnit={callCreateUnit} closeMenu={setShowMenu} />
 						:
 						<MenuFoldOutlined className="menu_icon" onClick={() => setShowMenu(true)} />
 					}
