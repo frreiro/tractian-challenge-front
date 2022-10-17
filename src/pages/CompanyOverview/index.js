@@ -67,7 +67,7 @@ export default function CompanyOverView() {
 		}
 	}
 
-	return companyDataIsLoading ? 'Carregando...' :
+	return companyDataIsLoading && companyData === null ? 'Carregando...' :
 		(
 			<Main>
 				<MediaQuery minWidth={1000}>
