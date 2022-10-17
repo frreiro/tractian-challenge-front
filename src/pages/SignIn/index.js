@@ -54,8 +54,14 @@ const Screen = styled.div`
 
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	/*justify-content: center;*/
 	align-items: center;
+
+	& > div{
+		background-color: red;
+		width: 100vw;
+		height: 70%;
+	}
 
 	@media (max-width: 760px) {
 		${TractianTitle}{

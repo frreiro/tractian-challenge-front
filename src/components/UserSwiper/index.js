@@ -105,14 +105,16 @@ const UserImage = styled.div`
 `;
 
 const SwiperWrapper = styled.div`
+	width: 100%;
+	height: 100%;
 
 	.swiper {
-  	width: 100vw;
-  	height: 150%;
+  	width: 100%;
+  	height: 100%;
 	}
 
 	.swiper-slide {
-	height: 300px;
+	/*height: 300px;*/
 	
 	text-align: center;
 	font-size: 18px;
@@ -149,10 +151,6 @@ const SwiperWrapper = styled.div`
 
 
     @media (max-width: 760px) {
-      .swiper {
-        width: 100vw;
-		height: calc(100vh - 300px);
-      }
 
 	  ${UserName}{
 		font-size: 20px;
@@ -163,6 +161,20 @@ const SwiperWrapper = styled.div`
 	  ${UserPosition}{
 		font-size: 15px;
 	  }
+
+	  &.swiper-slide-active {
+
+		${UserInfoWrapper}{
+			h1{
+				font-size: 32px;
+				margin-top: 40px;
+			}
+		}
+
+		${UserImage}{
+			transform: scale(1.6);
+		}
+			}	
 
     }
 
