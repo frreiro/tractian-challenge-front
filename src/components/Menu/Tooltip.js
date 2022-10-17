@@ -23,7 +23,7 @@ export default function Tooltip(props) {
 		>
 			{props.children}
 			{active && (
-				<div className={'Tooltip-Tip right'}>
+				<div className={`Tooltip-Tip ${props.direction || 'right'}`}>
 					{/* Content */}
 					{props.content}
 				</div>
@@ -82,6 +82,15 @@ const TooltopContainer = styled.div`
   bottom: 15%;
   transform: translateX(0) translateY(-50%);
   border-right-color: var(--tooltip-background-color);
+}
+
+.Tooltip-Tip.bottom {
+  bottom: calc(var(--tooltip-margin) * -8);
+}
+/* CSS border triangles */
+.Tooltip-Tip.bottom::before {
+  bottom: 100%;
+  border-bottom-color: var(--tooltip-background-color);
 }
 
 `;
