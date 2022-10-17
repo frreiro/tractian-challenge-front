@@ -58,9 +58,8 @@ const Screen = styled.div`
 	align-items: center;
 
 	& > div{
-		background-color: red;
 		width: 100vw;
-		height: 70%;
+		height: 65%;
 	}
 
 	@media (max-width: 760px) {

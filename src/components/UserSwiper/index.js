@@ -39,7 +39,7 @@ export default function UserSwiper({ selectUser }) {
 	return (
 		<SwiperWrapper>
 			<Swiper
-				slidesPerView={3}
+				slidesPerView={2}
 				spaceBetween={0}
 				centeredSlides={true}
 				//loop={true}
@@ -66,7 +66,7 @@ export default function UserSwiper({ selectUser }) {
 					);
 				})}
 				<SwiperSlide >
-					<Tooltip content={<CreateUser setNewUsers={(users) => setNewUsers(users)} />}>
+					<Tooltip direction={'bottom'} content={<CreateUser setNewUsers={(users) => setNewUsers(users)} />}>
 						<PlusCircleFilled style={{ color: '#fff', fontSize: 60, marginTop: 10, cursor: 'pointer' }} />
 					</Tooltip>
 				</SwiperSlide>
@@ -162,19 +162,24 @@ const SwiperWrapper = styled.div`
 		font-size: 15px;
 	  }
 
-	  &.swiper-slide-active {
+	  ${UserImage}{
+		width: 50px;
+		height: 50px;
+	  }
 
-		${UserInfoWrapper}{
-			h1{
-				font-size: 32px;
-				margin-top: 40px;
+	  .swiper-slide.swiper-slide-active {
+		
+			${UserInfoWrapper}{
+				h1{
+					font-size: 32px;
+					margin-top: 10px;
+				}
 			}
-		}
 
-		${UserImage}{
-			transform: scale(1.6);
-		}
-			}	
+			${UserImage}{
+				transform: scale(1.6);
+			}
+		}	
 
     }
 
